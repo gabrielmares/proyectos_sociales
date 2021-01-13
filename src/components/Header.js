@@ -8,7 +8,7 @@ const HeaderComponent = () => {
 
     const toggle = () => setDropdownOpen(!dropdownOpen);
     return (
-        <Nav className="bg-info justify-content-between text-white">
+        <Nav className="headercss justify-content-between text-white">
             <Dropdown isOpen={dropdownOpen} toggle={toggle} className="mt-2">
                 <DropdownToggle nav caret className="float-left mr-auto text-white">
                     Reportes
@@ -20,7 +20,7 @@ const HeaderComponent = () => {
                 </DropdownMenu>
             </Dropdown>
             <NavbarText className="my-auto">
-                <h2>Proyectos Sociales</h2>
+                <h2><b>Proyectos Sociales</b></h2>
             </NavbarText>
             <NavItem className="p-2">
                 <Button color="warning">Cerrar Sesion</Button>
