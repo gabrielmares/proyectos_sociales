@@ -12,8 +12,8 @@ const App = (props) => {
       <GlobalContext>
         <BrowserRouter>
           <Switch>
-            <Route exact path='/' component={Main} />
-            <Route exact path='/login' component={Login} />
+            <Route exact path='/main' component={Main} />
+            <Route exact path='/' component={Login} />
           </Switch>
         </BrowserRouter>
       </GlobalContext>

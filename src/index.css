@@ -1,13 +1,14 @@
 body {
   margin: 0;
   padding: 0;
-  height: 100vh;
-  width: 100vw;
+  /* height: 100vh;
+  width: 100vw; */
   font-family: 'Poppins', BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
 code {
@@ -15,19 +16,14 @@ code {
     monospace;
 }
 
-#root{
-  height: 100%;
-}
 
-.App{
-  height: 100%;
-}
 .bigCalendar-container{
   width: auto;
-  height: 75vmin;
+  height: 41vmax;
 }
 
 .iconcolor{
+  cursor: pointer;
   color: #3e48b8 ;
 }
 
@@ -38,6 +34,7 @@ code {
 
 .sidebarcss{
   background-color:#e9e0c6;
+  height: 100vh;
 }
 
 .rbc-toolbar-label{
@@ -59,39 +56,158 @@ code {
 }
 
   .mainCss{
-  height: 100vh;
-}  
+    background-color: rgb(250, 250, 250);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }  
 
 * {
   box-sizing: border-box;
 }
 
+.actions-btn {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+
+/* componentes de inicio de sesion */
 
 
 
-/* 
-.color-primary-0 { color: #226666 }	
-.color-primary-1 { color: #2F4343 }
-.color-primary-2 { color: #355757 }
-.color-primary-3 { color: #067575 }
-.color-primary-4 { color: #008989 }
 
-.color-secondary-1-0 { color: #323875 }	
-.color-secondary-1-1 { color: #3A3C4D }
-.color-secondary-1-2 { color: #424664 }
-.color-secondary-1-3 { color: #192387 }
-.color-secondary-1-4 { color: #13209E }
+.LoginComponent{
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(to bottom, rgba(245, 246, 252, 0.02), rgba(177, 66, 149, 0.73)), url('./components/background.JPG');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #464646;
+  overflow: hidden;
+  position: relative;
+  
+}
 
-.color-secondary-2-0 { color: #AA8B39 } 
-.color-secondary-2-1 { color: #70674F }
-.color-secondary-2-2 { color: #918159 }
-.color-secondary-2-3 { color: #C3910B }
-.color-secondary-2-4 { color: #E4A600 }
+.grameenSlogan{
+  font-size: 5vw;  
+  color: #ffffff;
+  margin-top: 5vw;
+  margin-left: 3rem;
+  font-weight: 700;
 
-.color-complement-0 { color: #AA6C39 }	
-.color-complement-1 { color: #705E4F }
-.color-complement-2 { color: #917259 }
-.color-complement-3 { color: #C35E0B }
-.color-complement-4 { color: #E46700 }
+}
 
-*/
+.grameenSlogan span{
+  opacity: 0.9;
+  animation: text ease 3s;
+}
+
+
+@keyframes text{
+  
+  0%{ opacity: 0;}
+  100%{opacity: 0.9;}
+}
+
+
+.formLogin{
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  color: #ffffff;
+  position: absolute;
+  margin-top: 14vh;
+  height: 62vh;
+  width: 40vh;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  right: 10px;
+  justify-content: center;
+  
+}
+
+.formLogin .padlock{
+  text-align:center;
+  color:#75a3df;
+  opacity: 1;
+  width:15vw;
+  height: 15vh;
+}
+
+.formLogin .submitButton{
+  margin-top:10%;
+  justify-content: center;
+  border-radius: 30px;
+  font-size: 22px;
+}
+
+.formLogin h2{
+  padding-top: 1rem;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.formLogin .card-header{
+  border-bottom: none;
+}
+
+.formLogin .card-body{
+  border-top: none;
+}
+
+.formLogin .resetPassword{  
+  font-size: 14px;
+  margin-top: 2vh;
+  color: cornflowerblue;
+  text-decoration: underline;
+}
+
+.formLogin small{
+  font-size: 12px;
+}
+
+@media (max-width:768px){
+  
+  .formLogin{
+    margin-top: 14vh;
+   height: 70vh;
+    font-size: 16px;
+    align-content: center;
+  }
+
+.grameenSlogan{
+  display: block;
+}
+
+ .formLogin .submitButton{
+    font-size: 14px;
+ }
+
+}
+
+@media (min-width:768px){
+.LoginComponent{
+  display: block;
+}
+
+  .formLogin{
+    margin-top: 14vh;
+   
+    font-size: 16px;
+    align-content: center;
+  }
+
+.grameenSlogan{
+  display: block;
+}
+
+ /* .formLogin .submitButton{
+    font-size: 14px;
+ } */
+
+}
