@@ -19,7 +19,7 @@ code {
 
 .bigCalendar-container{
   width: auto;
-  height: 41vmax;
+  height: 80vh;
 }
 
 .iconcolor{
@@ -28,13 +28,15 @@ code {
 }
 
 .headercss{
-  background-color: #119e9e;
+  background-color: #3767a7;
 }
 
 
 .sidebarcss{
   background-color:#e9e0c6;
   height: 100vh;
+  align-content: center;
+  justify-content: center;
 }
 
 .rbc-toolbar-label{
@@ -138,6 +140,7 @@ code {
   width:15vw;
   height: 15vh;
 }
+
 
 .formLogin .submitButton{
   margin-top:10%;
