@@ -13,11 +13,23 @@ const Localizer = momentLocalizer(moment);
 const CalendarComponent = () => {
 
 
-    const { setSidebar, sidebar, myEventsList } = useContext(sessionContext)
+    const { setSidebar, sidebar, coleccion } = useContext(sessionContext)
+    // const [totales, setTottales] = useState({});
+
+    // console.log(myEventsList[4].start, colectionPrepare[0].start)
+    const colectionPrepare = coleccion.map(evento => {
+        return {
+            ...evento,
+            start: new Date(evento.start),
+            end: new Date(evento.end)
+        }
+    })
+
+    console.log(new Date(coleccion[0].start), colectionPrepare[0].start)
 
 
     return (
-        <Container fluid={true} style={{height:'auto'}} >
+        <Container fluid={true} style={{ height: 'auto' }} >
             <div className="d-flex flex-row-reverse pb-4 pt-2">
                 <i onClick={() => setSidebar(!sidebar)}
                     style={{ cursor: "pointer" }}
@@ -33,7 +45,7 @@ const CalendarComponent = () => {
             <div className="bigCalendar-container">
                 <Calendar
                     localizer={Localizer}
-                    events={myEventsList}
+                    events={colectionPrepare}
                     onDoubleClickEvent={(event) => console.log(event)}
                     startAccessor="start"
                     endAccessor="end"

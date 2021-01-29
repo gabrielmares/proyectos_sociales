@@ -1,146 +1,185 @@
-import { FormGroup, Input, Label, Col, ModalHeader, Modal, ModalBody, ModalFooter, Button, Form, Row } from 'reactstrap'
-import { useState } from "react";
+import { FormGroup, Input, Label, Col, Button } from 'reactstrap'
+import { useContext } from "react";
 import DropdownMultiselect from "react-multiselect-dropdown-bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
-import ReactDateTime from 'react-datetime'
 import "react-datetime/css/react-datetime.css";
-import { saveElement } from '../../firebase/firebase'
+import 'moment/locale/es-mx'
+import { sessionContext } from '../../provider/contextGlobal'
+import ModalComponentJSX from './ModalComponent'
+import ModalConfirmComponentJSX from './ModalConfirmSave'
+import { GetDocuments } from '../../firebase/firebase'
+import { inputsProjectValidator } from '../../helpers/helpers'
+
 
 const ProjectComponentJSX = () => {
-    const [generales, setGenerales] = useState({
-        descripcion: "",
-        actividades: "",
-        tema: "",
-        addNameComunity: ''
-    });
-    const [comunity, setComunity] = useState([])
-    const [dateStart, setDateStart] = useState('');
-    const [dateEnd, setDateEnd] = useState('');
-    const { descripcion, actividades, tema, addNameComunity } = generales
-    const [showModal, setShowModal] = useState(false)
 
+    const { setShowModal,
+        showModal,
+        setPropsModal,
+        generales,
+        setGenerales,
+        setModalConfirm,
+        modalConfirm,
+        errors,
+        setErrors,
+        setProjectInfo,
+        projectInfo
+    } = useContext(sessionContext)
+
+
+
+
+    const { tema, fechaFin, fechaInicio, listaDeComunidadesAsignadas } = projectInfo
+
+    // objeto que pasa al modal para desplegar informacion y seleccion de modelo a almacenar
+    const Agregar = {
+        modelo: 'comunidades',
+        titulo: 'Agregar Comunidad',
+        cuerpoMsg: 'comunidad',
+        placeholder: 'la comunidad',
+    }
+
+
+    // funcion que lee los datos almacenados en la coleccion
+    const ListComunity = GetDocuments('comunidades');
+
+    // destructuramos ol objeto recibido de la funcion
+    // revisamos el status del mismo para ser enviado a pantalla
+    const { pending, coleccion } = ListComunity
+
+    // cuando responde la funcion y aun no se resuelve, se regresa
+    // hasta que la funcion termine su ejecucion
+    if (pending) return false
+
+    // funcion que sobrescribe las comunidades al objeto
     const selectCommunity = e => {
-        e.preventDefault();
-        console.log(e.value)
+        setProjectInfo({
+            ...projectInfo,
+            listaDeComunidadesAsignadas: e
+        })
     }
 
-    const inputPropsStart = {
-        placeholder: 'Fecha de Inicio',
-        disable: false
-    }
-    const inputPropsEnd = {
-        placeholder: 'Fecha de Cierre',
-        disable: false
-    }
 
-    const newComunity = addNameComunity => {
-        console.log(addNameComunity)
-        const comunidades = addNameComunity.trim().split(',');
-        console.log(comunidades)
-    }
-
+    // manejador de valores de entrada del formulario
+    // objeto global
     const handleChange = e => {
-        // e.preventDefault();
-        setGenerales({
-            ...generales,
+        setProjectInfo({
+            ...projectInfo,
             [e.target.name]: e.target.value
         })
     }
 
-    if (showModal) {
-
-        return (
-            <>
-                <Modal isOpen={showModal} className="modal-dialog modal-dialog-centered">
-                    <ModalHeader className="justify-content-center">
-                        <h3 className="text-center">Agregar Comunidad</h3>
-                    </ModalHeader>
-                    <ModalBody className="text-center">
-                        <span className="mb-4">Para agregar mas de 1 comunidad, separelas por ","</span>
-                        <Form>
-                            <FormGroup>
-                                <Row className="mt-4 ml-4">
-                                    <Label for="addNameComunity" className="mt-2">Nombre</Label>
-                                    <Col>
-                                        <Input
-                                            type="text"
-                                            placeholder="Nombre de la comunidad"
-                                            id="addNameComunity"
-                                            name='addNameComunity'
-                                            value={addNameComunity}
-                                            onChange={e => handleChange(e)}
-                                        />
-                                    </Col>
-                                </Row>
-                            </FormGroup>
-                        </Form>
-
-                    </ModalBody>
-                    <ModalFooter className="justify-content-center">
-                        <Button
-                            color="secondary"
-                            onClick={() => (setShowModal(!showModal))}
-                        >Cancelar
-                        </Button>
-                        <Button
-                            color="primary"
-                            onClick={() => newComunity(addNameComunity)}
-                        >agregar
-                        </Button>
-
-                    </ModalFooter>
-                </Modal>
-            </>
-        )
+    // pantalla modal utilizada para agregar
+    // nueva comunidad de operacion de proyectos
+    const showAndPropsModal = () => {
+        setPropsModal(Agregar)
+        setShowModal(true)
     }
+
+    // funcion utilizada para guardar el documento en la coleccion
+    // se une el objeto local al objeto global y pasa a la coleccion
+    const saveProjectEvent = () => {
+        const erroresValidacion = inputsProjectValidator(generales, listaDeComunidadesAsignadas, fechaInicio, fechaFin, tema)
+        if (Object.keys(erroresValidacion).length === 0) {
+            setGenerales({
+                ...generales,
+                listaDeComunidadesAsignadas,
+                start: fechaInicio,
+                end: fechaFin,
+                bgcolor: '#' + Math.floor(Math.random() * 16777215).toString(16), //funcion que genera el color de manera aleatoria
+                tema
+            })
+            setModalConfirm(true)
+        }
+
+        setErrors(erroresValidacion)
+
+
+    }
+
+
 
     return (
         <>
-            <FormGroup>
-                <ReactDateTime
-                    inputProps={inputPropsStart}
-                    value={dateStart}
-                    name='fechaInicio'
-                    onChange={e => setDateStart(e)}
-                />
-            </FormGroup>
-            <FormGroup>
-                <ReactDateTime
-                    inputProps={inputPropsEnd}
-                    value={dateEnd}
-                    name='fechaFin'
-                    onChange={e => setDateEnd(e._d)}
-                />
-            </FormGroup>
-            <FormGroup>
-                <Label>Tematica</Label>
-                <Input
-                    type="text"
-                    name="tema"
-                    value={tema}
-                    onChange={e => handleChange(e)}
-                />
-            </FormGroup>
-
-            <FormGroup row>
-                <Col>
+            <FormGroup row inline className="btndropdown">
+                {!showModal && (<Col lg={11} >
                     <DropdownMultiselect
                         placeholder="Comunidades"
-                        options={comunity}
+                        options={coleccion}
                         name="comunity"
                         handleOnChange={e => selectCommunity(e)}
+                        required='true'
+                        className={`col-6 ${errors.lineasIntervencion ? ('border border-danger') : null}`}
                     />
-                </Col>
+                </Col>)}
                 <FontAwesomeIcon
                     icon={faPlusCircle}
                     className='iconcolor mt-1'
                     size='2x'
-                    onClick={() => setShowModal(!showModal)}
+                    onClick={() => showAndPropsModal()}
                     title="Agregar comunidades"
                 />
+                {errors.listaDeComunidadesAsignadas && (<small className="text-center text-danger">{errors.listaDeComunidadesAsignadas}</small>)}
+            </FormGroup>
+            <FormGroup row>
+                <Label className="col-6 text-center">Inicio</Label>
+                <Label className="col-6 text-center">Fin</Label>
+            </FormGroup>
+            <FormGroup row className="ml-1 justify-content-between">
+                <Input
+                    type='datetime-local'
+                    onChange={e => handleChange(e)}
+                    defaultValue={fechaInicio}
+                    className={` ${errors.fechaFin ? ('border border-danger') : null}`}
+                    style={{ fontSize: '12px', height: '4vh', width: '10vw' }}
+                    name='fechaInicio'
+                    required='true'
+                />
+
+                <Input
+                    type='datetime-local'
+                    onChange={e => handleChange(e)}
+                    defaultValue={fechaFin}
+                    className={` ${errors.fechaFin ? ('border border-danger') : null}`}
+                    style={{ fontSize: '12px', height: '4vh', width: '10vw' }}
+                    name='fechaFin'
+                    required='true'
+                />
+                {errors.fechaFin && (<small className="text-center text-danger">{errors.fechaFin}</small>)}
             </FormGroup>
 
+            <FormGroup row>
+                <Label className="col-3 mt-2">Tematica</Label>
+                <Input
+                    type="text"
+                    name="tema"
+                    required='true'
+                    value={tema}
+                    onChange={e => handleChange(e)}
+                    className={`col-9 ${errors.tema ? ('border border-danger') : null}`}
+                />
+                {errors.tema && (<small className="text-center text-danger">{errors.tema}</small>)}
+            </FormGroup>
+            <FormGroup className="text-center">
+                <Button
+                    type='submit'
+                    color="primary"
+                    // size='lg'
+                    style={{ borderRadius: '25px', fontSize: '20px', marginTop: '1rem' }}
+                    onClick={() => saveProjectEvent()}
+                >
+                    Guardar
+                </Button>
+            </FormGroup>
+
+            {showModal &&
+                (<ModalComponentJSX />)
+            }
+            {modalConfirm &&
+                (<ModalConfirmComponentJSX />)
+
+            }
         </>
     );
 }
