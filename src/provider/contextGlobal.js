@@ -1,14 +1,12 @@
 import { createContext, useState } from 'react';
 import { GetEvents } from '../firebase/firebase'
-import events from '../components/privates/events';
 
 export const sessionContext = createContext();
 
 const GlobalContext = (props) => {
 
-    
+
     const [sidebar, setSidebar] = useState(true)  // state que muestra el formulario sidebar para registro de eventos
-    const [myEventsList, setMyEventsList] = useState(events) 
     const [showModal, setShowModal] = useState(false) // I/O del modal que agrega nuevos valores a las listas desplegables
     const [propsModal, setPropsModal] = useState({}); //cuando se llama al modal de agregar comunidades o lineas de interes, se pasan las props por este objeto
 
@@ -62,9 +60,7 @@ const GlobalContext = (props) => {
                 setGenerales,
                 modalConfirm,
                 setModalConfirm,
-                coleccion,
-                setMyEventsList,
-                myEventsList
+                coleccion
             }}
         >
             {props.children}
