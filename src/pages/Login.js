@@ -51,7 +51,7 @@ const LoginComponent = () => {
                         return <PrivateUser exact path="/main" component={Main} />
                     }
 
-                  
+
                 })
                 .catch(error => {
                     console.error('Hubo un error al ingresar', error);
@@ -124,7 +124,7 @@ const LoginComponent = () => {
 
                         </CardHeader>
                         <CardBody className="justify-content-center">
-                            <Form className="col-12" onSubmit={handleSubmit}>
+                            <Form className="col-12" onSubmit={handleSubmit} autoComplete="off">
                                 <InputGroup>
                                     <Input
                                         placeholder="Email"
@@ -147,6 +147,7 @@ const LoginComponent = () => {
                                         value={password}
                                         className={`col-12 ${errors.password && ('border border-danger text-danger')} mt-4`}
                                         onChange={e => handleChange(e)}
+                                        autoComplete='false'
                                     />
                                 </InputGroup>
                                 <div className="d-flex justify-content-center">

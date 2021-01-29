@@ -18,7 +18,7 @@ code {
 
 
 .bigCalendar-container{
-  width: auto;
+  /* width: auto; */
   height: 80vh;
 }
 
@@ -37,6 +37,20 @@ code {
   height: 100vh;
   align-content: center;
   justify-content: center;
+}
+
+ .dropdown-menu {
+  width: fit-content;
+  height: 200px;
+  /* display: inline-block; */
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.show .dropdown-item{
+  /* width: 200px; */
+  overflow: hidden;
+  display: block;
 }
 
 .rbc-toolbar-label{
@@ -68,14 +82,14 @@ code {
   box-sizing: border-box;
 }
 
-.actions-btn {
+/* .actions-btn {
   pointer-events: none;
   cursor: not-allowed;
   opacity: 0.65;
   filter: alpha(opacity=65);
   -webkit-box-shadow: none;
   box-shadow: none;
-}
+} */
 
 
 /* componentes de inicio de sesion */
@@ -86,7 +100,7 @@ code {
 .LoginComponent{
   height: 100vh;
   width: 100vw;
-  background: linear-gradient(to bottom, rgba(245, 246, 252, 0.02), rgba(177, 66, 149, 0.73)), url('./components/background.JPG');
+  background: linear-gradient(to bottom, rgba(245, 246, 252, 0.02), rgba(177, 66, 149, 0.73)), url('./components/background_resize.jpg');
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
