@@ -32,6 +32,13 @@ const GlobalContext = (props) => {
         tema: ''
     })
 
+    const [onSite, setOnSite] = useState('')
+
+    const [dateEvent, setDateEvent] = useState({
+        start: '',
+        end: '',
+    })
+
 
     // descarga de eventos, pasamos la coleccion como parametro
     // cuando termina la descarga de eventos, pasan a la vista
@@ -60,7 +67,11 @@ const GlobalContext = (props) => {
                 setGenerales,
                 modalConfirm,
                 setModalConfirm,
-                coleccion
+                coleccion,
+                setOnSite,
+                onSite,
+                dateEvent,
+                setDateEvent
             }}
         >
             {props.children}
