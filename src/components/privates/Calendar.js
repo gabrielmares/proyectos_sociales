@@ -14,9 +14,7 @@ const CalendarComponent = () => {
 
 
     const { setSidebar, sidebar, coleccion } = useContext(sessionContext)
-    // const [totales, setTottales] = useState({});
 
-    // console.log(myEventsList[4].start, colectionPrepare[0].start)
     const colectionPrepare = coleccion.map(evento => {
         return {
             ...evento,
@@ -25,7 +23,6 @@ const CalendarComponent = () => {
         }
     })
 
-    console.log(new Date(coleccion[0].start), colectionPrepare[0].start)
 
 
     return (
@@ -45,7 +42,8 @@ const CalendarComponent = () => {
             <div className="bigCalendar-container">
                 <Calendar
                     localizer={Localizer}
-                    events={colectionPrepare}
+                    events={(colectionPrepare === [] || colectionPrepare === undefined) ? ([]) : (colectionPrepare)} //si hay error en la descarga o no encontro eventos, 
+                    // colocamos un array en blanco, evitando el bloqueo de la aplicacion
                     onDoubleClickEvent={(event) => console.log(event)}
                     startAccessor="start"
                     endAccessor="end"
