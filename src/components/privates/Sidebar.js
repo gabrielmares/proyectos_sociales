@@ -12,7 +12,12 @@ import { GetDocuments } from '../../firebase/firebase'
 const SidebarComponent = () => {
 
 
-    const { setShowModal, showModal, setPropsModal, generales, setGenerales, errors } = useContext(sessionContext)
+    const { setShowModal,
+        showModal,
+        setPropsModal,
+        generales,
+        setGenerales,
+        errors, resetDropdown } = useContext(sessionContext)
     const { title, responsable, objetivo, tipoEvento } = generales
     // objeto que pasa al modal para desplegar informacion y seleccion de modelo a almacenar
     const Agregar = {
@@ -49,7 +54,6 @@ const SidebarComponent = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log('submit')
     }
 
     const showAndPropsModal = () => {
@@ -74,10 +78,10 @@ const SidebarComponent = () => {
                         name="title"
                         value={title}
                         onChange={e => handleChangeInputs(e)}
-                        required='true'
+                        required={true}
                         className={`col-8  ${errors.lineasIntervencion ? ('border border-danger') : null}`}
                     />
-                    {errors.nombre && (<small className="text-center text-danger">{errors.nombre}</small>)}
+                    {errors.nombre && (<small className="text-center text-danger col-12 mr-auto">{errors.nombre}</small>)}
                 </FormGroup>
                 <FormGroup row>
                     <Label for="responsableProyecto" className="col-4 mt-2">Responsable</Label>
@@ -87,10 +91,10 @@ const SidebarComponent = () => {
                         name="responsable"
                         value={responsable}
                         onChange={e => handleChangeInputs(e)}
-                        required='true'
-                        className={`col-8  ${errors.lineasIntervencion ? ('border border-danger') : null}`}
+                        required={true}
+                        className={`col-8  ${errors.responsable ? ('border border-danger') : null}`}
                     />
-                    {errors.responsable && (<small className="text-center text-danger">{errors.responsable}</small>)}
+                    {errors.responsable && (<small className="text-center text-danger col-12 mr-auto">{errors.responsable}</small>)}
                 </FormGroup>
                 <FormGroup row>
                     <Label for="objetivoProyecto" className="col-4 mt-2">Objetivo</Label>
@@ -100,15 +104,15 @@ const SidebarComponent = () => {
                         name="objetivo"
                         value={objetivo}
                         onChange={e => handleChangeInputs(e)}
-                        required='true'
-                        className={`col-8  ${errors.lineasIntervencion ? ('border border-danger') : null}`}
+                        required={true}
+                        className={`col-8  ${errors.objetivo ? ('border border-danger') : null}`}
                     />
-                    {errors.objetivo && (<small className="text-center text-danger">{errors.objetivo}</small>)}
+                    {errors.objetivo && (<small className="text-center text-danger col-12 mr-auto">{errors.objetivo}</small>)}
                 </FormGroup>
 
                 <FormGroup row >
                     <Col>
-                        {!showModal && (<DropdownMultiselect
+                        {(!showModal && !resetDropdown) && (<DropdownMultiselect
                             placeholder="Lineas de Intervencion"
                             options={coleccion}
                             handleOnChange={e => selectLinesOpportunity(e)}
@@ -116,12 +120,12 @@ const SidebarComponent = () => {
                     </Col>
                     <FontAwesomeIcon
                         icon={faPlusCircle}
-                        className={'iconcolor mt-1'}
+                        className={`iconcolor mt-1  ${showModal && ('align-items-end')}`}
                         size='2x'
                         onClick={() => showAndPropsModal()}
                         title="Agregar comunidades"
                     />
-                    {errors.lineasIntervencion && (<small className="text-center text-danger">{errors.lineasIntervencion}</small>)}
+                    {errors.lineasIntervencion && (<small className="text-center text-danger col-12 mr-auto">{errors.lineasIntervencion}</small>)}
                 </FormGroup>
                 <FormGroup className="row">
                     <Label className="mt-2 col-3 mr-auto">
@@ -134,13 +138,13 @@ const SidebarComponent = () => {
                         placeholder="Proyecto/Actividad"
                         value={tipoEvento}
                         onChange={e => handleChangeInputs(e)}
-                        required='true'
+                        required={true}
                     >
                         <option value={0}>Proyecto/Actividad</option>
                         <option value={1}>Proyecto</option>
                         <option value={2}>Actividad</option>
                     </Input>
-                    {errors.tipoEvento && (<small className="text-center text-danger">{errors.tipoEvento}</small>)}
+                    {errors.tipoEvento && (<small className="text-center text-danger col-12 mr-auto">{errors.tipoEvento}</small>)}
                 </FormGroup>
                 {(parseInt(tipoEvento) === 1)
                     ?
