@@ -12,6 +12,7 @@ const GlobalContext = (props) => {
 
     const [modalConfirm, setModalConfirm] = useState(false) //manejo de entrada y salida del modal de confirmacion
     const [errors, setErrors] = useState({}) //manejo de errores del formulario
+    const [resetDropdown, setResetDropdown] = useState(false) // estado que vacia los dropdown multiselect cuando se guarda la informacion en la coleccion
 
     // objeto global que almacena la informacion de la primera parte
     // del formulario
@@ -32,12 +33,15 @@ const GlobalContext = (props) => {
         tema: ''
     })
 
+    // Objetos para almacenar la informacion del evento
     const [onSite, setOnSite] = useState('')
 
     const [dateEvent, setDateEvent] = useState({
         start: '',
         end: '',
     })
+
+    const [virtualEvent, setVirtualEvent] = useState('')
 
 
     // descarga de eventos, pasamos la coleccion como parametro
@@ -71,7 +75,11 @@ const GlobalContext = (props) => {
                 setOnSite,
                 onSite,
                 dateEvent,
-                setDateEvent
+                setDateEvent,
+                virtualEvent,
+                setVirtualEvent,
+                setResetDropdown,
+                resetDropdown
             }}
         >
             {props.children}

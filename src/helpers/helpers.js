@@ -54,6 +54,34 @@ export function inputsOnSiteValidator(generales, start, onSite) {
     return errores;
 }
 
+export function inputsVirtualEventValidator(generales, start, virtualEvent) {
+
+    let errores = {}
+    const {
+        title,
+        responsable,
+        objetivo,
+        lineasIntervencion
+    } = generales;
+
+    const virtualEventEmails = (virtualEvent) => {
+        if (virtualEvent.length === 0) return errores.virtualEvent = 'Debe agregar las direcciones de los participantes'
+        virtualEvent.split(',').map(email => {
+            if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email.trim())) return errores.virtualEvent = `El email ${email}, no es valido `
+            return errores
+        })
+    }
+
+    if (!title || title.trim().length < 6) errores.nombre = 'La longitud del nombre del proyecto debe ser mayor a 6 caracteres'
+    if (!responsable || responsable.trim().length < 4) errores.responsable = 'El nombre del responsable debe ser mayor a 4 caracteres'
+    if (!objetivo || objetivo.trim().length < 10) errores.objetivo = 'El objetivo del programa debe ser mayor a 10 caracteres'
+    if (lineasIntervencion.length === 0) errores.lineasIntervencion = 'Es necesario definir al menos una linea de intervencion'
+    if (!start === "" || start <= Date.now()) errores.dateEvent = 'La fecha ingresada no es valida'
+    virtualEventEmails(virtualEvent);
+
+    return errores;
+}
+
 export const changeDate = (e, hours) => {
     const fecha = String((e).replace('T', " ") + ' UTC')
     const newDate = new Date(fecha)

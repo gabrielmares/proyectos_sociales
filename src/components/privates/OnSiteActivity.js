@@ -27,7 +27,7 @@ const ActivityOnSiteComponent = () => {
         if (Object.keys(erroresValidacion).length === 0) {
             setGenerales({
                 ...generales,
-                lugar: onSite,
+                place: onSite,
                 start: start.replace('T', " "),
                 end: end.replace('T', " "),
                 bgcolor: Math.floor(Math.random() * 16777215).toString(16), //funcion que genera el color de manera aleatoria
@@ -51,7 +51,8 @@ const ActivityOnSiteComponent = () => {
                     name='onSite'
                     value={onSite}
                 />
-                {errors.place && (<small className="text-center text-danger col-12 mr-auto">{errors.place}</small>)}
+                {/* funcion que muestra el correo que no pasa la validacion */}
+                {errors.place && (<small className="text-center text-danger col-12 mr-auto">{errors.place}</small>)} 
 
             </FormGroup>
             <FormGroup className="text-center">
