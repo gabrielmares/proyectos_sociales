@@ -4,19 +4,36 @@ import { sessionContext } from '../../provider/contextGlobal';
 import { saveEvents } from '../../firebase/firebase'
 const ModalConfirmComponentJSX = () => {
 
-    const { modalConfirm, setModalConfirm, generales, errors, setGenerales, setProjectInfo } = useContext(sessionContext)
+    const {
+        modalConfirm,
+        setModalConfirm,
+        generales,
+        errors,
+        setGenerales,
+        setProjectInfo,
+        setResetDropdown,
+        setDateEvent,
+        setVirtualEvent,
+        setOnsite } = useContext(sessionContext)
 
 
     const newElement = () => {
         if (Object.keys(errors).length === 0) {
             saveEvents(generales)
                 .then(() => {
+                    setResetDropdown(true)
                     setProjectInfo({
                         listaDeComunidadesAsignadas: [],
                         fechaInicio: '',
                         fechaFin: '',
                         tema: ''
                     });
+                    setOnsite('');
+                    setVirtualEvent('')
+                    setDateEvent({
+                        start: '',
+                        end: '',
+                    })
                     setGenerales({
                         objetivo: "",
                         title: "",
@@ -25,6 +42,7 @@ const ModalConfirmComponentJSX = () => {
                         lineasIntervencion: [],
                         tipoEvento: 0
                     })
+                    setResetDropdown(false)
                     setModalConfirm(false)
                 })
                 .catch(err => {
@@ -37,7 +55,7 @@ const ModalConfirmComponentJSX = () => {
     return (
         <Modal isOpen={modalConfirm} className="modal-dialog modal-dialog-centered">
             <ModalHeader className="bg-info text-white justify-content-center">
-                <h3><strong>Confirmacion</strong></h3>
+                <strong>Confirmacion</strong>
             </ModalHeader>
             <ModalBody className="text-center">
                 <h4>De click en guardar para almacenar el proyecto/evento</h4>

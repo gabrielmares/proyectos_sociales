@@ -24,7 +24,8 @@ const ProjectComponentJSX = () => {
         errors,
         setErrors,
         setProjectInfo,
-        projectInfo
+        projectInfo,
+        resetDropdown
     } = useContext(sessionContext)
 
 
@@ -85,9 +86,9 @@ const ProjectComponentJSX = () => {
             setGenerales({
                 ...generales,
                 listaDeComunidadesAsignadas,
-                start: fechaInicio,
-                end: fechaFin,
-                bgcolor: '#' + Math.floor(Math.random() * 16777215).toString(16), //funcion que genera el color de manera aleatoria
+                start: fechaInicio.replace('T', " "),
+                end: fechaFin.replace('T', " "),
+                bgcolor: Math.floor(Math.random() * 16777215).toString(16), //funcion que genera el color de manera aleatoria
                 tema
             })
             setModalConfirm(true)
@@ -103,19 +104,21 @@ const ProjectComponentJSX = () => {
     return (
         <>
             <FormGroup row inline className="btndropdown">
-                {!showModal && (<Col lg={11} >
-                    <DropdownMultiselect
-                        placeholder="Comunidades"
-                        options={coleccion}
-                        name="comunity"
-                        handleOnChange={e => selectCommunity(e)}
-                        required='true'
-                        className={`col-6 ${errors.lineasIntervencion ? ('border border-danger') : null}`}
-                    />
-                </Col>)}
+                <Col >
+                    {(!showModal || !resetDropdown) && ( //comparacion que restablece el componente despues de agregar un campo o un nuevo evento
+                        <DropdownMultiselect
+                            placeholder="Comunidades"
+                            options={coleccion}
+                            name="comunity"
+                            handleOnChange={e => selectCommunity(e)}
+                            required='true'
+                            className={`col-6 ${errors.lineasIntervencion ? ('border border-danger') : null}`}
+                        />
+                    )}
+                </Col>
                 <FontAwesomeIcon
                     icon={faPlusCircle}
-                    className='iconcolor mt-1'
+                    className={`iconcolor mt-1  ${showModal && ('align-items-end')}`}
                     size='2x'
                     onClick={() => showAndPropsModal()}
                     title="Agregar comunidades"
