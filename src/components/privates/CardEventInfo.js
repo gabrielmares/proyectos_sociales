@@ -59,8 +59,7 @@ const CardComponent = ({ event }) => {
             lineasIntervencion,
             tipoEvento,
         })
-        setSidebar(false)
-        console.log(localEvent)
+        setSidebar(false);
         if (parseInt(tipoEvento) === 1) {
             return setProjectInfo({
                 listaDeComunidadesAsignadas,

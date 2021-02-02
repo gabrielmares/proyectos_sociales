@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 import { Input, Label, FormGroup } from 'reactstrap'
 import ActivityOnSiteComponent from './OnSiteActivity'
 import { sessionContext } from '../../provider/contextGlobal'
