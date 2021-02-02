@@ -61,24 +61,25 @@ export function logOut() {
 
 // obtener la informacion del usuario y el tokenId para los intercambios con el backend
 export const useAuth = () => {
+    console.log('llamando a firebase')
     const [logged, saveLogged] = React.useState({
         isSignedIn: true,
         pending: true,
         user: null,
-        token: ''
     });
     React.useEffect(() => {
         const unsuscribe = firebase.auth().onAuthStateChanged(async user => {
             if (user) { //si tenemos un usuario en linea, obtenemos el token y lo regresamos
                 let tokenID = await user.getIdTokenResult();
                 if (tokenID) {
-                    saveLogged({ pending: false, user, isSignedIn: false, token: tokenID })
+                    saveLogged({ pending: false, user, isSignedIn: false })
                 } else {
-                    saveLogged({ pending: false, user: '', isSignedIn: false, token: '' })
+                    saveLogged({ pending: false, user: '', isSignedIn: false })
                 }
             }
             else { //si no hay usuario limpiamos valores condicionales
-                saveLogged({ pending: false, user: '', isSignedIn: false, token: '' })
+                console.log('sin datos')
+                saveLogged({ pending: false, user: '', isSignedIn: false})
             }
         })
         return () => unsuscribe();
@@ -147,7 +148,7 @@ export const GetDocuments = (colectionToDownload) => {
 // grabar un evento en la coleccion
 export const saveEvents = async (element) => {
     try {
-        await firebase.firestore().collection('listaEventos').doc(element.title).set(element)
+        await firebase.firestore().collection('listaEventos').doc(element.title).set({ ...element, id: Date.now() })
             .then(res => {
                 // console.log(res)
                 return res;

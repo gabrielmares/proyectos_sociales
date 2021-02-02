@@ -5,7 +5,6 @@ import Calendar from '../components/privates/Calendar'
 import { Col, Row } from 'reactstrap'
 import { sessionContext } from '../provider/contextGlobal'
 import SidebarEventsComponent from '../components/privates/SidebarEventsInfo'
-// import GlobalContext from '../provider/contextGlobal'
 
 
 const MainComponent = (props) => {
@@ -13,7 +12,6 @@ const MainComponent = (props) => {
     const { sidebar } = useContext(sessionContext)
 
     return (
-        // <GlobalContext>
             <div className="mainCss">
                 <Header {...props} />
                 <Col lg={12}>
@@ -29,7 +27,6 @@ const MainComponent = (props) => {
                     </Row>
                 </Col>
             </div>
-        // </GlobalContext>
     );
 }
 
