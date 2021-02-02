@@ -223,8 +223,11 @@ code {
   display: block;
 }
 
- /* .formLogin .submitButton{
-    font-size: 14px;
- } */
+}
 
+.iconBell{
+  color:rgb(235, 31, 31);
+  cursor: pointer;
+  top: 0%;
+  right: 0%;
 }
