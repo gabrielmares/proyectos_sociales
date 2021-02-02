@@ -22,13 +22,7 @@ export function inputsProjectValidator(generales, listaDeComunidadesAsignadas, f
     if (fechaInicio > fechaFin) errores.fechaFin = 'La fecha de inicio no puede ser mayor a la fecha de culminacion'
     if (tema.trim().length < 4) errores.tema = 'Es necesario ser mas descriptivo en la tematica del evento'
 
-    // if (parseInt(tipoEvento) === 2) {
-    //     return false
-    // if (!listaDeComunidadesAsignadas.length === 0) errores.listaDeComunidadesAsignadas = 'Es necesario definir al menos una comunidad de intervencion'
-    // if (fechaInicio === "" || fechaInicio === "") errores.fechaInicio = 'Es necesario definir ambas fechas'
-    // if (fechaInicio > fechaFin) errores.fechaFin = 'La fecha de inicio no puede ser mayor a la fecha de culminacion'
-    // if (tema.trim().length < 4) errores.tema = 'Es necesario ser mas descriptivo en la tematica del evento'
-    // }
+
     return errores;
 }
 

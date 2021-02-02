@@ -89,11 +89,11 @@ export const useAuth = () => {
 
 
 
-// grabar un elemento en la coleccion
+// grabar un elemento en la coleccion, comunidades y lineas de intervencion
 export const saveElement = async (collection, element) => {
     console.log(collection, element)
     try {
-        await firebase.firestore().collection(`${collection}`).doc(element).set(element)
+        await firebase.firestore().collection(`${collection}`).doc(element).set({ 'nombre': element })
             .then(res => {
                 console.log(res)
                 return res;
@@ -107,7 +107,7 @@ export const saveElement = async (collection, element) => {
 }
 
 
-
+// descarga la lista de comunidades y/o lineas de intervencion
 export const GetDocuments = (colectionToDownload) => {
     let array = [];
     const [list, setList] = useState({
@@ -144,16 +144,15 @@ export const GetDocuments = (colectionToDownload) => {
 }
 
 
-// grabar un elemento en la coleccion
+// grabar un evento en la coleccion
 export const saveEvents = async (element) => {
-    // console.log(element)
     try {
         await firebase.firestore().collection('listaEventos').doc(element.title).set(element)
             .then(res => {
                 // console.log(res)
                 return res;
             })
-            .catch(err => console.error(err))
+            .catch(err => console.log(err))
 
     } catch (error) {
         console.error('se produjo un error', error)
@@ -161,7 +160,7 @@ export const saveEvents = async (element) => {
 
 }
 
-
+// funcion que descarga la lista de eventos almacenados en BD
 export const GetEvents = (colectionToDownload) => {
     let array = [];
     const [list, setList] = useState({
