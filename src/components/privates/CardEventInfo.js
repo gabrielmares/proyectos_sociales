@@ -4,29 +4,24 @@ import { sessionContext } from '../../provider/contextGlobal'
 import moment from 'moment'
 
 const CardComponent = ({ event }) => {
-// eslint-disable-next-line 
+    // eslint-disable-next-line 
     const [localEvent, setLocalEvent] = useState(event)
 
-    const { title,
-        lugar,
+    const {
+        title,
         responsable,
         start,
         end,
-        tipoEvento, } = localEvent
+        tipoEvento,
+        placeEvent,
+    } = localEvent
 
 
     const {
-        setGenerales,
-        setProjectInfo,
-        setOnSite,
-        setDateEvent,
-        setperiod,
         setSidebar,
         setResetDropdown,
-        setVirtualEvent,
         setActive,
-        setSelection,
-        setImpacto
+        setGenerales,
     } = useContext(sessionContext)
 
     // formatear la fecha en modo DD/MM/DDDD
@@ -37,56 +32,20 @@ const CardComponent = ({ event }) => {
     }
 
 
-    const handleEditEvent = (e) => {
-        setActive(!moment(e.end.split(" ")[0]).isBefore(moment(), 'day'))
-        const {
-            title,
-            responsable,
-            start,
-            end,
-            lineasIntervencion,
-            impacto,
-            objetivo,
-            tema,
-            tipoEvento,
-            listaDeComunidadesAsignadas
-        } = e
-        setImpacto(impacto);
-        setGenerales({
-            objetivo,
-            title,
-            responsable,
-            lineasIntervencion,
-            tipoEvento,
-        })
-        setSidebar(false);
-        if (parseInt(tipoEvento) === 1) {
-            return setProjectInfo({
-                listaDeComunidadesAsignadas,
-                fechaInicio: start.replace(' ', "T"),
-                fechaFin: end.replace(' ', "T"),
-                tema
-            })
-        }
+
+    // funcion que pasa al formulario al objeto a editar o cerrar
+    const handleEditEvent = (localEvent) => {
         setResetDropdown(false);
-        if (parseInt(tipoEvento) === 2) {
-            return updateEvent(localEvent)
-        }
-        setResetDropdown(true);
-
-    }
-
-    const updateEvent = (evento) => {
-        const { period, lugar, invitados, start, end, selection } = evento
-        setOnSite(lugar || "");
-        setperiod(period || "");
-        setSelection(selection || 0);
-        setVirtualEvent(invitados || "");
-        setDateEvent({
-            start: start.replace(' ', 'T'),
-            end: end.replace(' ', 'T')
+        setActive(!moment(localEvent.end.split(" ")[0]).isBefore(moment(), 'day'))
+        setGenerales({
+            ...localEvent,
+            start: localEvent.start.replace(' ', "T"),
+            end: localEvent.end.replace(' ', "T")
         });
+        setSidebar(false);
+        setResetDropdown(true);
     }
+
 
 
     return (
@@ -95,8 +54,8 @@ const CardComponent = ({ event }) => {
                 <Row>
                     <span className="text-left mr-auto " style={{ fontSize: '14px' }}><strong>{title}</strong></span>
                     <span style={{ fontSize: '11px', marginRight: '2px', textTransform: 'uppercase' }}>
-                        {/* tipo de evento, si es proyecto aparecen COMUNIDADES, si no, lo que se almaceno en la coleccion */}
-                        {(parseInt(tipoEvento) === 1) ? ('COMUNIDADES') : (lugar)}
+                        {/* tipo de evento, si es proyecto aparecen "En Campo", si no, lo que se almaceno en la coleccion */}
+                        {(parseInt(tipoEvento) === 1) ? ('En Campo') : (placeEvent)}
                     </span>
                 </Row>
             </CardHeader>

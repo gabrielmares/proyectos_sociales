@@ -10,11 +10,7 @@ const ModalConfirmComponentJSX = () => {
         generales,
         errors,
         setGenerales,
-        setProjectInfo,
         setResetDropdown,
-        setDateEvent,
-        setVirtualEvent,
-        setOnSite,
         setActive,
         setSelection } = useContext(sessionContext)
 
@@ -24,31 +20,29 @@ const ModalConfirmComponentJSX = () => {
             saveEvents(generales)
                 .then(() => {
                     setResetDropdown(true)
-                    setProjectInfo({
-                        listaDeComunidadesAsignadas: [],
-                        fechaInicio: '',
-                        fechaFin: '',
-                        tema: ''
-                    });
-                    setOnSite('');
-                    setVirtualEvent('')
-                    setDateEvent({
-                        start: '',
-                        end: '',
-                    });
                     setActive(true);
                     setSelection(0);
                     setGenerales({
-                        objetivo: "",
+                        objective: "",
                         title: "",
                         allday: false,
                         responsable: "",
                         lineasIntervencion: [],
-                        tipoEvento: 0
+                        tipoEvento: 0,
+                        listaDeComunidadesAsignadas: [],
+                        tema: '',
+                        impactPeople: '',
+                        period: '1',
+                        start: '',
+                        end: '',
+                        eventSelection: '',
+                        placeEvent: '',
+                        bgcolor: '',
+                        emailAsistentes: '',
                     })
                     setResetDropdown(false)
                     setModalConfirm(false)
-                })
+                }) 
                 .catch(err => {
                     alert('no se pudo guardar el documento', err)
                     console.log(err)
