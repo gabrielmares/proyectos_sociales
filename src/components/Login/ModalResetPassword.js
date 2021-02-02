@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { ModalFooter, ModalBody, Modal, ModalHeader, Row, Label, Input, Button } from 'reactstrap'
+import { ModalFooter, ModalBody, Modal, ModalHeader, Row, Label, Input, Button } from 'reactstrap';
+import { ResetPassword } from '../../firebase/firebase'
 
 const ModalResetPassword = () => {
     const [email, setEmail] = useState('')
@@ -35,9 +36,9 @@ const ModalResetPassword = () => {
                     required={true}
                     style={{ borderRadius: '25px', fontSize: '18px', marginTop: '1rem', marginLeft: '1rem' }}
                     className="col-4"
-                    onClick={() => console.log()}
+                    onClick={() => ResetPassword(email)}
                 >
-                    Registrar
+                    Restablecer
                 </Button>
 
             </ModalFooter>

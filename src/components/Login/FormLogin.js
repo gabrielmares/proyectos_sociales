@@ -17,7 +17,6 @@ const initialState = {
 
 const LoginComponent = () => {
     const history = useHistory();
-
     const [resetPassword, setModalResetPassword] = useState(false)
 
 
@@ -103,7 +102,6 @@ const LoginComponent = () => {
 
     }
 
-    const handleReset = () => console.log('restablecer contraseña')
 
     return (
         <Col className="LoginComponent">
