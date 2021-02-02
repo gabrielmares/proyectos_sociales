@@ -14,7 +14,9 @@ const ModalConfirmComponentJSX = () => {
         setResetDropdown,
         setDateEvent,
         setVirtualEvent,
-        setOnsite } = useContext(sessionContext)
+        setOnSite,
+        setActive,
+        setSelection } = useContext(sessionContext)
 
 
     const newElement = () => {
@@ -28,12 +30,14 @@ const ModalConfirmComponentJSX = () => {
                         fechaFin: '',
                         tema: ''
                     });
-                    setOnsite('');
+                    setOnSite('');
                     setVirtualEvent('')
                     setDateEvent({
                         start: '',
                         end: '',
-                    })
+                    });
+                    setActive(true);
+                    setSelection(0);
                     setGenerales({
                         objetivo: "",
                         title: "",
@@ -46,7 +50,7 @@ const ModalConfirmComponentJSX = () => {
                     setModalConfirm(false)
                 })
                 .catch(err => {
-                    alert('no se pudo guardar el documento')
+                    alert('no se pudo guardar el documento', err)
                     console.log(err)
                 })
         }

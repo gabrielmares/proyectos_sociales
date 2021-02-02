@@ -9,10 +9,18 @@ import ActivityComponent from './VirtualActivity'
 const ComponentActivity = () => {
 
 
-    const { dateEvent, setDateEvent, errors } = useContext(sessionContext)
+    const {
+        dateEvent,
+        setDateEvent,
+        errors,
+        period,
+        setperiod,
+        selection,
+        setSelection
+    } = useContext(sessionContext)
 
-    const [selection, setSelection] = useState(0)
-    const [period, setperiod] = useState('1')
+
+
 
     const { start } = dateEvent
     const handleChange = (e, period) => {
@@ -24,8 +32,6 @@ const ComponentActivity = () => {
             end: newDate.toJSON().replace('T', " ").replace('UTC', "")
         })
     }
-
-
 
 
     return (
@@ -44,11 +50,12 @@ const ComponentActivity = () => {
                     className={`col-6 ${errors.dateEvent ? ('border border-danger') : null}`}
                     style={{ fontSize: '12px', height: '4vh' }}
                     name='start'
-                    required='true'
+                    required={true}
                 />
 
                 <Input
                     type='number'
+                    required={true}
                     min={1}
                     value={period}
                     className="ml-auto col-5"
@@ -63,6 +70,7 @@ const ComponentActivity = () => {
                     type="select"
                     value={selection}
                     name="tipoActividad"
+                    required={true}
                     className="col-8"
                     onChange={e => setSelection(e.target.value)}>
                     <option value={0} unselectable>Formato</option>
@@ -77,7 +85,7 @@ const ComponentActivity = () => {
                         <ActivityComponent />
                     )
                 )}
-            
+
         </>
     );
 }

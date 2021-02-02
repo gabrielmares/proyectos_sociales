@@ -16,7 +16,12 @@ const ActivityOnSiteComponent = () => {
         setGenerales,
         modalConfirm,
         setModalConfirm,
-        dateEvent
+        dateEvent,
+        selection,
+        active,
+        impacto,
+        setImpacto,
+        period
     } = useContext(sessionContext)
     const { start, end } = dateEvent;
 
@@ -27,7 +32,9 @@ const ActivityOnSiteComponent = () => {
         if (Object.keys(erroresValidacion).length === 0) {
             setGenerales({
                 ...generales,
-                place: onSite,
+                lugar: onSite,
+                selection,
+                period,
                 start: start.replace('T', " "),
                 end: end.replace('T', " "),
                 bgcolor: Math.floor(Math.random() * 16777215).toString(16), //funcion que genera el color de manera aleatoria
@@ -52,8 +59,21 @@ const ActivityOnSiteComponent = () => {
                     value={onSite}
                 />
                 {/* funcion que muestra el correo que no pasa la validacion */}
-                {errors.place && (<small className="text-center text-danger col-12 mr-auto">{errors.place}</small>)} 
+                {errors.place && (<small className="text-center text-danger col-12 mr-auto">{errors.place}</small>)}
 
+            </FormGroup>
+            <FormGroup row hidden={active}>
+                <Label className="col-6 mt-2">Numero de asistentes</Label>
+                <Input
+                    type="number"
+                    name="impacto"
+                    required={true}
+                    disabled={active}
+                    value={impacto}
+                    onChange={e => setImpacto(e.target.value)}
+                    className={`col-6 ${errors.impacto ? ('border border-danger') : null}`}
+                />
+                {errors.impacto && (<small className="text-center text-danger">{errors.impacto}</small>)}
             </FormGroup>
             <FormGroup className="text-center">
                 <Button

@@ -25,7 +25,10 @@ const ProjectComponentJSX = () => {
         setErrors,
         setProjectInfo,
         projectInfo,
-        resetDropdown
+        active,
+        resetDropdown,
+        impacto,
+        setImpacto
     } = useContext(sessionContext)
 
 
@@ -85,6 +88,7 @@ const ProjectComponentJSX = () => {
         if (Object.keys(erroresValidacion).length === 0) {
             setGenerales({
                 ...generales,
+                impacto,
                 listaDeComunidadesAsignadas,
                 start: fechaInicio.replace('T', " "),
                 end: fechaFin.replace('T', " "),
@@ -110,8 +114,9 @@ const ProjectComponentJSX = () => {
                             placeholder="Comunidades"
                             options={coleccion}
                             name="comunity"
+                            disabled={!active}
                             handleOnChange={e => selectCommunity(e)}
-                            required='true'
+                            required={true}
                             className={`col-6 ${errors.lineasIntervencion ? ('border border-danger') : null}`}
                         />
                     )}
@@ -134,10 +139,11 @@ const ProjectComponentJSX = () => {
                     type='datetime-local'
                     onChange={e => handleChange(e)}
                     defaultValue={fechaInicio}
+                    disabled={!active}
                     className={` ${errors.fechaFin ? ('border border-danger') : null}`}
                     style={{ fontSize: '12px', height: '4vh', width: '10vw' }}
                     name='fechaInicio'
-                    required='true'
+                    required={true}
                 />
 
                 <Input
@@ -147,7 +153,8 @@ const ProjectComponentJSX = () => {
                     className={` ${errors.fechaFin ? ('border border-danger') : null}`}
                     style={{ fontSize: '12px', height: '4vh', width: '10vw' }}
                     name='fechaFin'
-                    required='true'
+                    required={true}
+                    disabled={!active}
                 />
                 {errors.fechaFin && (<small className="text-center text-danger">{errors.fechaFin}</small>)}
             </FormGroup>
@@ -157,18 +164,33 @@ const ProjectComponentJSX = () => {
                 <Input
                     type="text"
                     name="tema"
-                    required='true'
+                    required={true}
+                    disabled={!active}
                     value={tema}
                     onChange={e => handleChange(e)}
                     className={`col-9 ${errors.tema ? ('border border-danger') : null}`}
                 />
                 {errors.tema && (<small className="text-center text-danger">{errors.tema}</small>)}
             </FormGroup>
+            <FormGroup row hidden={active}>
+                <Label className="col-6 mt-2">Numero de asistentes</Label>
+                <Input
+                    type="number"
+                    name="impacto"
+                    required={true}
+                    disabled={active}
+                    value={impacto}
+                    onChange={e => setImpacto(e.target.value)}
+                    className={`col-6 ${errors.impacto ? ('border border-danger') : null}`}
+                />
+                {errors.impacto && (<small className="text-center text-danger">{errors.impacto}</small>)}
+            </FormGroup>
             <FormGroup className="text-center">
                 <Button
                     type='submit'
                     color="primary"
                     // size='lg'
+                    required={true}
                     style={{ borderRadius: '25px', fontSize: '20px', marginTop: '1rem' }}
                     onClick={() => saveProjectEvent()}
                 >

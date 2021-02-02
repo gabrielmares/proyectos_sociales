@@ -17,7 +17,10 @@ const SidebarComponent = () => {
         setPropsModal,
         generales,
         setGenerales,
-        errors, resetDropdown } = useContext(sessionContext)
+        errors,
+        resetDropdown,
+        active
+    } = useContext(sessionContext)
     const { title, responsable, objetivo, tipoEvento } = generales
     // objeto que pasa al modal para desplegar informacion y seleccion de modelo a almacenar
     const Agregar = {
@@ -79,6 +82,7 @@ const SidebarComponent = () => {
                         value={title}
                         onChange={e => handleChangeInputs(e)}
                         required={true}
+                        disabled={!active}
                         className={`col-8  ${errors.lineasIntervencion ? ('border border-danger') : null}`}
                     />
                     {errors.nombre && (<small className="text-center text-danger col-12 mr-auto">{errors.nombre}</small>)}
@@ -92,6 +96,7 @@ const SidebarComponent = () => {
                         value={responsable}
                         onChange={e => handleChangeInputs(e)}
                         required={true}
+                        disabled={!active}
                         className={`col-8  ${errors.responsable ? ('border border-danger') : null}`}
                     />
                     {errors.responsable && (<small className="text-center text-danger col-12 mr-auto">{errors.responsable}</small>)}
@@ -105,6 +110,7 @@ const SidebarComponent = () => {
                         value={objetivo}
                         onChange={e => handleChangeInputs(e)}
                         required={true}
+                        disabled={!active}
                         className={`col-8  ${errors.objetivo ? ('border border-danger') : null}`}
                     />
                     {errors.objetivo && (<small className="text-center text-danger col-12 mr-auto">{errors.objetivo}</small>)}
@@ -135,6 +141,7 @@ const SidebarComponent = () => {
                         id="tipoEvento"
                         className="col-8"
                         name="tipoEvento"
+                        disabled={!active}
                         placeholder="Proyecto/Actividad"
                         value={tipoEvento}
                         onChange={e => handleChangeInputs(e)}
