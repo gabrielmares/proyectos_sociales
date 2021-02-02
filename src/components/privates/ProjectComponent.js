@@ -8,6 +8,7 @@ import 'moment/locale/es-mx'
 import { sessionContext } from '../../provider/contextGlobal'
 import ModalComponentJSX from './ModalComponent'
 import ModalConfirmComponentJSX from './ModalConfirmSave'
+import ResetForm from './ModalResetForm'
 import { GetDocuments } from '../../firebase/firebase'
 import { inputsProjectValidator } from '../../helpers/helpers'
 
@@ -23,18 +24,23 @@ const ProjectComponentJSX = () => {
         modalConfirm,
         errors,
         setErrors,
-        setProjectInfo,
-        projectInfo,
         active,
         resetDropdown,
-        impacto,
-        setImpacto
+        handleChange,
+        setResetForm,
+        resetForm
     } = useContext(sessionContext)
 
 
 
 
-    const { tema, fechaFin, fechaInicio, listaDeComunidadesAsignadas } = projectInfo
+    const {
+        tema,
+        start,
+        end,
+        listaDeComunidadesAsignadas,
+        impactPeople
+    } = generales
 
     // objeto que pasa al modal para desplegar informacion y seleccion de modelo a almacenar
     const Agregar = {
@@ -58,21 +64,12 @@ const ProjectComponentJSX = () => {
 
     // funcion que sobrescribe las comunidades al objeto
     const selectCommunity = e => {
-        setProjectInfo({
-            ...projectInfo,
+        setGenerales({
+            ...generales,
             listaDeComunidadesAsignadas: e
         })
     }
 
-
-    // manejador de valores de entrada del formulario
-    // objeto global
-    const handleChange = e => {
-        setProjectInfo({
-            ...projectInfo,
-            [e.target.name]: e.target.value
-        })
-    }
 
     // pantalla modal utilizada para agregar
     // nueva comunidad de operacion de proyectos
@@ -84,16 +81,13 @@ const ProjectComponentJSX = () => {
     // funcion utilizada para guardar el documento en la coleccion
     // se une el objeto local al objeto global y pasa a la coleccion
     const saveProjectEvent = () => {
-        const erroresValidacion = inputsProjectValidator(generales, listaDeComunidadesAsignadas, fechaInicio, fechaFin, tema)
+        const erroresValidacion = inputsProjectValidator(generales)
         if (Object.keys(erroresValidacion).length === 0) {
             setGenerales({
                 ...generales,
-                impacto,
-                listaDeComunidadesAsignadas,
-                start: fechaInicio.replace('T', " "),
-                end: fechaFin.replace('T', " "),
+                start: start.replace('T', " "),
+                end: end.replace('T', " "),
                 bgcolor: Math.floor(Math.random() * 16777215).toString(16), //funcion que genera el color de manera aleatoria
-                tema
             })
             setModalConfirm(true)
         }
@@ -113,11 +107,12 @@ const ProjectComponentJSX = () => {
                         <DropdownMultiselect
                             placeholder="Comunidades"
                             options={coleccion}
-                            name="comunity"
+                            selected={listaDeComunidadesAsignadas}
+                            name="listaDeComunidadesAsignadas"
                             disabled={!active}
                             handleOnChange={e => selectCommunity(e)}
                             required={true}
-                            className={`col-6 ${errors.lineasIntervencion ? ('border border-danger') : null}`}
+                            className={`col-6 ${errors.listaDeComunidadesAsignadas ? ('border border-danger') : null}`}
                         />
                     )}
                 </Col>
@@ -138,21 +133,21 @@ const ProjectComponentJSX = () => {
                 <Input
                     type='datetime-local'
                     onChange={e => handleChange(e)}
-                    defaultValue={fechaInicio}
+                    defaultValue={start}
                     disabled={!active}
                     className={` ${errors.fechaFin ? ('border border-danger') : null}`}
                     style={{ fontSize: '12px', height: '4vh', width: '10vw' }}
-                    name='fechaInicio'
+                    name='start'
                     required={true}
                 />
 
                 <Input
                     type='datetime-local'
                     onChange={e => handleChange(e)}
-                    defaultValue={fechaFin}
+                    defaultValue={end}
                     className={` ${errors.fechaFin ? ('border border-danger') : null}`}
                     style={{ fontSize: '12px', height: '4vh', width: '10vw' }}
-                    name='fechaFin'
+                    name='end'
                     required={true}
                     disabled={!active}
                 />
@@ -176,35 +171,42 @@ const ProjectComponentJSX = () => {
                 <Label className="col-6 mt-2">Numero de asistentes</Label>
                 <Input
                     type="number"
-                    name="impacto"
+                    name="impactPeople"
                     required={true}
                     disabled={active}
-                    value={impacto}
-                    onChange={e => setImpacto(e.target.value)}
+                    value={impactPeople}
+                    onChange={e => handleChange(e)}
                     className={`col-6 ${errors.impacto ? ('border border-danger') : null}`}
                 />
                 {errors.impacto && (<small className="text-center text-danger">{errors.impacto}</small>)}
             </FormGroup>
-            <FormGroup className="text-center">
+            <FormGroup className="justify-content-center" row>
+                <Button
+                    color="warning"
+                    style={{ borderRadius: '25px', fontSize: '18px', marginTop: '1rem', marginRight: '1rem' }}
+                    onClick={() => (setResetForm(true))}
+                    className="col-4"
+                >
+                    Restablecer
+                        </Button>
                 <Button
                     type='submit'
                     color="primary"
                     // size='lg'
+                    size='lg'
                     required={true}
-                    style={{ borderRadius: '25px', fontSize: '20px', marginTop: '1rem' }}
+                    style={{ borderRadius: '25px', fontSize: '18px', marginTop: '1rem', marginLeft:'1rem' }}
+                    className="col-4"
                     onClick={() => saveProjectEvent()}
                 >
-                    Guardar
+                    Registrar
                 </Button>
+
             </FormGroup>
 
-            {showModal &&
-                (<ModalComponentJSX />)
-            }
-            {modalConfirm &&
-                (<ModalConfirmComponentJSX />)
-
-            }
+            {showModal && (<ModalComponentJSX />)}
+            {modalConfirm && (<ModalConfirmComponentJSX />)}
+            {resetForm && (<ResetForm />)}
         </>
     );
 }

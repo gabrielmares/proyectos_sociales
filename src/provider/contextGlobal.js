@@ -13,36 +13,37 @@ const GlobalContext = (props) => {
     const [modalConfirm, setModalConfirm] = useState(false) //manejo de entrada y salida del modal de confirmacion
     const [errors, setErrors] = useState({}) //manejo de errores del formulario
     const [resetDropdown, setResetDropdown] = useState(false) // estado que vacia los dropdown multiselect cuando se guarda la informacion en la coleccion
-    const [period, setperiod] = useState('1')
-    // objeto global que almacena la informacion de la primera parte
-    // del formulario
+    const [resetForm, setResetForm] = useState(false)
+
+
+    // objeto global que almacena la informacion del formulario, contiene todo los campos del evento
     const [generales, setGenerales] = useState({
-        objetivo: "",
+        id:'',
+        objective: "",
         title: "",
         allday: false,
         responsable: "",
         lineasIntervencion: [],
-        tipoEvento: 0
-    });
-
-    // objeto global para almacenar la informacion del proyecto
-    const [projectInfo, setProjectInfo] = useState({
+        tipoEvento: 0,
         listaDeComunidadesAsignadas: [],
-        fechaInicio: '',
-        fechaFin: '',
         tema: '',
-    })
-
-    // Objetos para almacenar la informacion del evento
-    const [onSite, setOnSite] = useState('')
-    const [impacto, setImpacto] = useState(0)
-    const [dateEvent, setDateEvent] = useState({
+        impactPeople: '0',
+        period: '1',
         start: '',
         end: '',
-    })
+        eventSelection: '',
+        placeEvent: '',
+        bgcolor: '',
+        emailAsistentes: ''
+    });
 
-    const [virtualEvent, setVirtualEvent] = useState('')
-    const [selection, setSelection] = useState(0)
+    const handleChange = e => {
+        setGenerales({
+            ...generales,
+            [e.target.name]: e.target.value
+        })
+    }
+
 
     // descarga de eventos, pasamos la coleccion como parametro
     // cuando termina la descarga de eventos, pasan a la vista
@@ -58,11 +59,9 @@ const GlobalContext = (props) => {
         <sessionContext.Provider
             value={{
                 sidebar,
-                projectInfo,
                 errors,
                 setErrors,
                 setSidebar,
-                setProjectInfo,
                 showModal,
                 setShowModal,
                 propsModal,
@@ -72,22 +71,13 @@ const GlobalContext = (props) => {
                 modalConfirm,
                 setModalConfirm,
                 coleccion,
-                setOnSite,
-                onSite,
-                dateEvent,
-                setDateEvent,
-                virtualEvent,
-                setVirtualEvent,
                 setResetDropdown,
                 resetDropdown,
-                period,
-                setperiod,
                 active,
                 setActive,
-                selection,
-                setSelection,
-                impacto, 
-                setImpacto
+                handleChange,
+                resetForm,
+                setResetForm
             }}
         >
             {props.children}

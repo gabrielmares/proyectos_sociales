@@ -14,17 +14,21 @@ const SidebarEventsComponent = () => {
     // mapeo de eventos del dia que se desplegaran en el sidebarEvents
     coleccion.map(event => {
         // cuando el evento es actividad de un dia, se valida que el evento sea solo de este dia
-        if (moment(event.start.split(' ')[0]).isSame(Date.now(), 'day') && parseInt(event.tipoEvento) === 2) {
+        if (moment(event.start).isSame(Date.now(), '[]') && parseInt(event.tipoEvento) === 2) {
             newArray.push(event)
         }
-        if (parseInt(event.tipoEvento) === 1 && (moment(event.start.split(' ')[0]).isSame(Date.now(), 'day') || (moment().isBetween(event.start.split(' ')[0], event.end.split(' ')[0])))) {
+        if (moment(event.start).isSame(Date.now(), '[]') && parseInt(event.tipoEvento) === 1) {
+            newArray.push(event)
+        }
+        if (parseInt(event.tipoEvento) === 1 && (moment(event.start).isSame(Date.now(), '[]') || (moment().isBetween(event.start, event.end, '[]')))) {
             newArray.push(event)
         }
         return newArray
     })
 
     // revision de objetos fuera de fecha que aun no tienen el numero de personas impactadas
-    outDatePending = coleccion.filter(event => (moment(event.end.split(' ')[0]).isBefore(moment(), 'day') && parseInt(event.impacto) === 0))
+    outDatePending = coleccion.filter(event => (moment(event.end).isBefore(moment(), '[]') && parseInt(event.impactPeople) === 0))
+    console.log(outDatePending, coleccion, newArray)
 
     return (
         <>

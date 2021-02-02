@@ -6,56 +6,56 @@ import { inputsVirtualEventValidator } from '../../helpers/helpers'
 
 const ActivityComponent = () => {
 
-    const { virtualEvent,
+    const {
         generales,
-        setVirtualEvent,
         errors,
         setErrors,
         setGenerales,
         modalConfirm,
         setModalConfirm,
-        dateEvent,
+        handleChange
     } = useContext(sessionContext);
-    const { end, start } = dateEvent
+    const { end, start, emailAsistentes } = generales
 
 
     const saveVirtualEvent = () => {
-        const erroresValidacion = inputsVirtualEventValidator(generales, start, virtualEvent) //pasamos a la funcion los valores a revisar 
+        const erroresValidacion = inputsVirtualEventValidator(generales) //pasamos a la funcion los valores a revisar 
         if (Object.keys(erroresValidacion).length === 0) {
             setGenerales({
                 ...generales,
-                lugar: 'ZOOM',
+                placeEvent: 'ZOOM',
                 start: start.replace('T', " "),
                 end: end.replace('T', " "),
-                invitados: virtualEvent,
                 bgcolor: Math.floor(Math.random() * 16777215).toString(16), //funcion que genera el color de manera aleatoria
             })
             setModalConfirm(true)
         }
 
         setErrors(erroresValidacion)
+
     }
+
 
 
     return (
         <>
             <FormGroup row>
                 <Label
-                    for="virtualEvent"
+                    for="emails"
                     className="mt-1"
                 >
                     Asistentes
-                     
+
                 </Label>
-               
+
                 <Input
-                    id="virtualEvent"
+                    id="emails"
                     type="textarea"
-                    value={virtualEvent}
-                    onChange={e => setVirtualEvent(e.target.value)}
-                    style={{maxHeight:'9rem'}}
+                    value={emailAsistentes}
+                    onChange={e => handleChange(e)}
+                    style={{ maxHeight: '9rem' }}
                 />
-                 <small>Separe los asistentes por ","</small>
+                <small>Separe los asistentes por ","</small>
                 {errors.virtualEvent && (<small className="text-center text-danger col-12 mr-auto">{errors.virtualEvent}</small>)}
             </FormGroup>
             <FormGroup className="text-center">

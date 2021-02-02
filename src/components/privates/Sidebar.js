@@ -19,9 +19,10 @@ const SidebarComponent = () => {
         setGenerales,
         errors,
         resetDropdown,
-        active
+        active,
+        handleChange
     } = useContext(sessionContext)
-    const { title, responsable, objetivo, tipoEvento } = generales
+    const { title, responsable, objective, tipoEvento, lineasIntervencion } = generales
     // objeto que pasa al modal para desplegar informacion y seleccion de modelo a almacenar
     const Agregar = {
         modelo: 'lineasIntervencion',
@@ -40,13 +41,6 @@ const SidebarComponent = () => {
 
     if (pending) return false
 
-    const handleChangeInputs = e => {
-        setGenerales({
-            ...generales,
-            [e.target.name]: e.target.value
-        })
-    }
-
 
     const selectLinesOpportunity = e => {
         setGenerales({
@@ -55,9 +49,6 @@ const SidebarComponent = () => {
         })
     }
 
-    const handleSubmit = e => {
-        e.preventDefault();
-    }
 
     const showAndPropsModal = () => {
         setPropsModal(Agregar)
@@ -73,14 +64,14 @@ const SidebarComponent = () => {
                 </Col>
             </Row>
             <hr />
-            <Form style={{ marginTop: '1rem', marginLeft: '1rem' }} onSubmit={e => handleSubmit(e)} noValidate>
+            <Form style={{ marginTop: '1rem', marginLeft: '1rem' }} onSubmit={e => e.preventDefault()} noValidate>
                 <FormGroup row>
                     <Label for="nombreProyecto" className="col-4 mt-2">Actividad</Label>
                     <Input type="text"
                         id="nombreProyecto"
                         name="title"
                         value={title}
-                        onChange={e => handleChangeInputs(e)}
+                        onChange={e => handleChange(e)}
                         required={true}
                         disabled={!active}
                         className={`col-8  ${errors.lineasIntervencion ? ('border border-danger') : null}`}
@@ -94,7 +85,7 @@ const SidebarComponent = () => {
                         id="responsableProyecto"
                         name="responsable"
                         value={responsable}
-                        onChange={e => handleChangeInputs(e)}
+                        onChange={e => handleChange(e)}
                         required={true}
                         disabled={!active}
                         className={`col-8  ${errors.responsable ? ('border border-danger') : null}`}
@@ -106,9 +97,9 @@ const SidebarComponent = () => {
                     <Input
                         type='text'
                         id="objetivoProyecto"
-                        name="objetivo"
-                        value={objetivo}
-                        onChange={e => handleChangeInputs(e)}
+                        name="objective"
+                        value={objective}
+                        onChange={e => handleChange(e)}
                         required={true}
                         disabled={!active}
                         className={`col-8  ${errors.objetivo ? ('border border-danger') : null}`}
@@ -118,9 +109,14 @@ const SidebarComponent = () => {
 
                 <FormGroup row >
                     <Col>
-                        {(!showModal && !resetDropdown) && (<DropdownMultiselect
+                        {(!showModal || !resetDropdown) && (<DropdownMultiselect
                             placeholder="Lineas de Intervencion"
+                            className={`col-6 ${errors.lineasIntervencion ? ('border border-danger') : null}`}
                             options={coleccion}
+                            disabled={!active}
+                            required={true}
+                            selected={lineasIntervencion}
+                            name="lineasIntervencion"
                             handleOnChange={e => selectLinesOpportunity(e)}
                         />)}
                     </Col>
@@ -144,7 +140,7 @@ const SidebarComponent = () => {
                         disabled={!active}
                         placeholder="Proyecto/Actividad"
                         value={tipoEvento}
-                        onChange={e => handleChangeInputs(e)}
+                        onChange={e => handleChange(e)}
                         required={true}
                     >
                         <option value={0}>Proyecto/Actividad</option>

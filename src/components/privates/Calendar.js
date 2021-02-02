@@ -13,15 +13,39 @@ const Localizer = momentLocalizer(moment);
 const CalendarComponent = () => {
 
 
-    const { setSidebar, sidebar, coleccion } = useContext(sessionContext)
+    const {
+        setSidebar,
+        sidebar,
+        coleccion,
+        setResetDropdown,
+        setActive,
+        setGenerales
+    } = useContext(sessionContext)
 
     const colectionPrepare = coleccion.map(evento => {
+        // preparamos los objetos a desplegar en formulario
+        // como fechas aceptables por el componente Calendar
         return {
             ...evento,
             start: new Date(evento.start),
             end: new Date(evento.end)
         }
     })
+
+
+    const handleEditEvent = (id) => {
+        const localEvent = coleccion.filter(evento => evento.id === id)
+        console.log(localEvent)
+        setResetDropdown(false);
+        setActive(!moment(localEvent[0].end.split(" ")[0]).isBefore(moment(), 'day'))
+        setGenerales({
+            ...localEvent[0],
+            start: localEvent[0].start.replace(' ', "T"),
+            end: localEvent[0].end.replace(' ', "T")
+        });
+        setSidebar(false);
+        setResetDropdown(true);
+    }
 
 
 
@@ -44,7 +68,7 @@ const CalendarComponent = () => {
                     localizer={Localizer}
                     events={(colectionPrepare === [] || colectionPrepare === undefined) ? ([]) : (colectionPrepare)} //si hay error en la descarga o no encontro eventos, 
                     // colocamos un array en blanco, evitando el bloqueo de la aplicacion
-                    onDoubleClickEvent={(event) => console.log(event)}
+                    onDoubleClickEvent={(event) => handleEditEvent(event.id)}
                     startAccessor="start"
                     endAccessor="end"
                     messages={{
