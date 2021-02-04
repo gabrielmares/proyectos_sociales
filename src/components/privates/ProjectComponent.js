@@ -183,7 +183,6 @@ const ProjectComponentJSX = () => {
             <FormGroup className="justify-content-center" row>
                 <Button
                     color="warning"
-                    style={{ borderRadius: '25px', fontSize: '18px', marginTop: '1rem', marginRight: '1rem' }}
                     onClick={() => (setResetForm(true))}
                     className="col-4"
                 >
@@ -193,9 +192,7 @@ const ProjectComponentJSX = () => {
                     type='submit'
                     color="primary"
                     // size='lg'
-                    size='lg'
                     required={true}
-                    style={{ borderRadius: '25px', fontSize: '18px', marginTop: '1rem', marginLeft:'1rem' }}
                     className="col-4"
                     onClick={() => saveProjectEvent()}
                 >

@@ -45,7 +45,7 @@ const SidebarEventsComponent = () => {
                     <FontAwesomeIcon
                         icon={faBell}
                         className={`${(outDatePending.length > 0) && ('iconBell')}  ml-auto mr-4`}
-                        size='2x'
+                        // size='2x'
                     />
                 </i>
             </div>

@@ -5,6 +5,14 @@ import { ResetPassword } from '../../firebase/firebase'
 const ModalResetPassword = () => {
     const [email, setEmail] = useState('')
     const [modal, setCloseModal] = useState(true)
+
+    const FnToResetPassword = (email) => {
+        ResetPassword(email)
+            .then(() => setCloseModal(false))
+            .catch(err => console.log(err))
+
+    }
+
     return (
         <Modal isOpen={modal} className="modal-dialog modal-dialog-centered">
             <ModalHeader className="justify-content-center">
@@ -36,7 +44,7 @@ const ModalResetPassword = () => {
                     required={true}
                     style={{ borderRadius: '25px', fontSize: '18px', marginTop: '1rem', marginLeft: '1rem' }}
                     className="col-4"
-                    onClick={() => ResetPassword(email)}
+                    onClick={() => FnToResetPassword(email)}
                 >
                     Restablecer
                 </Button>
