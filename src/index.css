@@ -16,10 +16,10 @@ code {
     monospace;
 }
 
-
+@media screen and (max-height:938px) and (max-width:2100px){
+  
 .bigCalendar-container{
-  /* width: auto; */
-  height: 80vh;
+  height: 45em;
 }
 
 .iconcolor{
@@ -28,6 +28,7 @@ code {
 }
 
 .headercss{
+  height: 5em;
   background-color: #3767a7;
 }
 
@@ -48,7 +49,6 @@ code {
 }
 
 .show .dropdown-item{
-  /* width: 200px; */
   overflow: hidden;
   display: block;
 }
@@ -56,7 +56,7 @@ code {
 .rbc-toolbar-label{
   text-transform: capitalize;
   font-weight: 700;
-  margin-left: 10rem;
+  margin-left: auto;
 }
 
 .rbc-month-view{
@@ -83,7 +83,7 @@ code {
 }
 
 
-
+/* componentes de pagina de login */
 
 .LoginComponent{
   height: 100vh;
@@ -114,12 +114,6 @@ code {
 }
 
 
-@keyframes text{
-  
-  0%{ opacity: 0;}
-  100%{opacity: 0.9;}
-}
-
 
 .formLogin{
   background-color: rgba(0, 0, 0, 0.4);
@@ -144,75 +138,155 @@ code {
 }
 
 
-.formLogin .submitButton{
-  margin-top:10%;
-  justify-content: center;
-  border-radius: 30px;
-  font-size: 22px;
-}
-
-.formLogin h2{
-  padding-top: 1rem;
-  font-size: 36px;
-  font-weight: 700;
-}
-
-.formLogin .card-header{
-  border-bottom: none;
-}
-
-.formLogin .card-body{
-  border-top: none;
-}
-
-.formLogin .resetPassword{  
+#email{
+  height: 3.2em;
   font-size: 14px;
-  margin-top: 2vh;
-  color: cornflowerblue;
-  text-decoration: underline;
+  margin-bottom: 1.5em;
 }
 
-.formLogin small{
-  font-size: 12px;
-}
-
-@media (max-width:768px){
-  
-  .formLogin{
-    margin-top: 14vh;
-   height: 70vh;
-    font-size: 16px;
-    align-content: center;
-  }
-
-.grameenSlogan{
-  display: block;
+#submitButton{
+  height: 2.7em;
+  width: 10em;
+  margin-top: 2em;
+  font-size: 1.1em;
+  text-align: center;
+  border-radius: 1.3em;
 }
 
 
+#passsword{
+  height: 3.2em;
+  font-size: 14px;
 }
 
-@media (min-width:768px){
-.LoginComponent{
-  display: block;
+.footerLoginModal{
+  font-size: 16px;
 }
 
-  .formLogin{
-    margin-top: 14vh;
-   
-    font-size: 16px;
-    align-content: center;
-  }
-
-.grameenSlogan{
-  display: block;
-}
-
+.resetPassword{
+  margin-top: 2em;
+  font-size: 1em;
 }
 
 .iconBell{
   color:rgb(235, 31, 31);
   cursor: pointer;
-  top: 0%;
-  right: 0%;
+  font-size: 34px;
+}
+
+}
+
+/* estilos para pantalla mediana */
+@media screen and (max-height:937px) and (max-width:1600px) {
+  .headercss{
+    height: 5em;
+  }
+  .headercss h2{
+    font-size: 32px;
+  }
+
+  .sidebarCss h3{
+    font-size: 20px;
+  }
+  div.row.form-group{
+    font-size: 12px;
+    
+  }
+  
+  div.row.form-group input{
+    height: 30px;
+    font-size: 14px;
+  }
+  #tipoEvento{
+    height: 30px;
+    font-size: 14px;
+  }
+  div.row.form-group .dropdown button{
+    font-size: 14px;
+    height: 30px;
+  }
+  div.justify-content-center.row.form-group button{
+    margin-inline: 1rem;
+    border-radius: 15px;
+    font-size: 13px;
+    /* height: 30px; */
+  }
+
+  .sidebarcss .row h4{
+    margin-top: 0.1rem;
+    font-size: 18px;
+  }
+
+
+  .iconBell{
+    font-size: 28px;
+    color:rgb(235, 31, 31);
+    cursor: pointer;
+  }
+  .bigCalendar-container{
+    height: 43em;
+  }
+  
+.rbc-toolbar-label{
+  text-transform: capitalize;
+  font-weight: 700;
+  /* margin-left: 10rem; */
+}
+
+.rbc-month-view{
+  font-weight: 700;
+}
+
+.rbc-month-header{
+  text-transform: capitalize;
+}
+
+.rbc-btn-group{
+  font-weight: 700;
+}
+.rbc-toolbar span{
+  font-size: 12px;
+  justify-content: center;
+}
+
+
+/* formulario de inicio de sesion */
+
+#submitButton{
+  height: 2.5em;
+  width: 10em;
+  margin-top: 2em;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+#email{
+  height: 3em;
+  font-size: 14px;
+  margin-bottom: 1.5em;
+}
+
+#passsword{
+  height: 3em;
+  font-size: 14px;
+}
+
+.footerLoginModal{
+  font-size: 12px;
+}
+
+.resetPassword{
+  margin-top: 2em;
+  font-size: 1em;
+}
+
+}
+
+/* media querys */
+
+
+@keyframes text{
+  
+  0%{ opacity: 0;}
+  100%{opacity: 0.9;}
 }

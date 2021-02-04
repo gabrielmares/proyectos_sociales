@@ -56,7 +56,7 @@ const SidebarComponent = () => {
     }
 
     return (
-        <Col lg={12} >
+        <Col lg={12} className="sidebarCss" >
             <Row>
                 <Col className="justify-content-center mt-4">
                     <h3 className="text-center">Registro</h3>
@@ -66,7 +66,7 @@ const SidebarComponent = () => {
             <hr />
             <Form style={{ marginTop: '1rem', marginLeft: '1rem' }} onSubmit={e => e.preventDefault()} noValidate>
                 <FormGroup row>
-                    <Label for="nombreProyecto" className="col-4 mt-2">Actividad</Label>
+                    <Label for="nombreProyecto" lg={4} md={4}>Actividad</Label>
                     <Input type="text"
                         id="nombreProyecto"
                         name="title"

@@ -115,7 +115,7 @@ const LoginComponent = () => {
                     <Card className="formLogin text-center">
                         <CardHeader>
                             <h2 className="text-center">Bienvenido</h2>
-
+                            
                             <Col className="text-center" >
                                 <Icon
                                     className="padlock"
@@ -126,12 +126,12 @@ const LoginComponent = () => {
 
                         </CardHeader>
                         <CardBody className="justify-content-center">
-                            <Form className="col-12" onSubmit={handleSubmit} autoComplete="off">
+                            <Form onSubmit={handleSubmit} autoComplete="off">
                                 <InputGroup>
                                     <Input
                                         placeholder="Email"
-                                        className={`col-12 ${errors.email && ('border border-danger text-danger')} `}
-
+                                        className={`${errors.email && ('border border-danger text-danger')}`}
+                                        id="email"
                                         name="email"
                                         type="text"
                                         value={email}
@@ -145,9 +145,10 @@ const LoginComponent = () => {
                                     <Input
                                         placeholder="Password"
                                         name="password"
+                                        id="passsword"
                                         type="password"
                                         value={password}
-                                        className={`col-12 ${errors.password && ('border border-danger text-danger')} mt-4`}
+                                        className={`${errors.password && ('border border-danger text-danger')}`}
                                         onChange={e => handleChange(e)}
                                         autoComplete='false'
                                     />
@@ -157,9 +158,10 @@ const LoginComponent = () => {
                                 </div>
                                 <Button
                                     type='submit'
+                                    id="submitButton"
                                     color='primary'
-                                    className="col-8 p-2 submitButton"
-                                    style={{ fontSize: '18px' }}
+                                    className="submitButton"
+
                                     disabled={submit}
                                 >Iniciar sesión</Button>
                                 <Button
@@ -174,9 +176,9 @@ const LoginComponent = () => {
                         </CardBody>
                         <CardFooter>
                             <Row>
-                                <h6 className="text-center">
+                                <h6 className="text-center footerLoginModal">
                                     ¿Aun no esta registrado?, solicite sus credenciales al &nbsp;
-                                    <a href='gabriel.mares@grameen.mx' target="_blank">Administrador</a>
+                                    <a href="mailto: sistemas@grameendelafrontera.org.mx" rel="noreferrer" target="_blank">Administrador</a>
                                 </h6>
                             </Row>
                         </CardFooter>

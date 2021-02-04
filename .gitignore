@@ -7,11 +7,18 @@
 
 # testing
 /coverage
+.firebaserc
+firebase.json
 
 # production
 /build
+<<<<<<< HEAD
 .firebaserc
 firebase.json
+=======
+/.firebase
+
+>>>>>>> 4d807e6890fbc0009e05f77559c758a3b6a39457
 
 # misc
 .env
