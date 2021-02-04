@@ -7,9 +7,13 @@
 
 # testing
 /coverage
+.firebaserc
+firebase.json
 
 # production
 /build
+/.firebase
+
 
 # misc
 .env
