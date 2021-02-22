@@ -1,24 +1,24 @@
 import { useContext } from 'react';
-import { FormGroup, Label, Input, Button } from 'reactstrap'
+import { Button } from 'reactstrap'
 import { sessionContext } from '../../provider/contextGlobal'
 import { inputsOnSiteValidator } from '../../helpers/helpers'
 import ModalConfirmComponentJSX from './ModalConfirmSave'
-
+import ResetForm from './ModalResetForm'
 // componente que presenta los datos complementarios del formulario
 // para eventos en campo
 const ActivityOnSiteComponent = () => {
 
-    const { errors,
+    const {
         setErrors,
         onSite,
         generales,
         setGenerales,
         modalConfirm,
         setModalConfirm,
-        active,
-        handleChange
+        setResetForm,
+        resetForm
     } = useContext(sessionContext)
-    const { start, end, placeEvent, impactPeople } = generales;
+    const { start, end } = generales;
 
 
 
@@ -27,7 +27,6 @@ const ActivityOnSiteComponent = () => {
         if (Object.keys(erroresValidacion).length === 0) {
             setGenerales({
                 ...generales,
-                lugar: onSite,
                 start: start.replace('T', " "),
                 end: end.replace('T', " "),
                 bgcolor: Math.floor(Math.random() * 16777215).toString(16), //funcion que genera el color de manera aleatoria
@@ -41,47 +40,25 @@ const ActivityOnSiteComponent = () => {
 
     return (
         <>
-            <FormGroup row>
-                <Label className="col-3 mr-auto">Lugar del evento</Label>
-                <Input
-                    type='text'
-                    onChange={e => handleChange(e)}
-                    required='true'
-                    className={` col-8 ${errors.place ? ('border border-danger') : null}`}
-                    name='placeEvent'
-                    value={placeEvent}
-                />
-                {/* funcion que muestra el correo que no pasa la validacion */}
-                {errors.place && (<small className="text-center text-danger col-12 mr-auto">{errors.place}</small>)}
-
-            </FormGroup>
-            <FormGroup row hidden={active}>
-                <Label className="col-6 mt-2">Numero de asistentes</Label>
-                <Input
-                    type="number"
-                    name="impactPeople"
-                    required={true}
-                    disabled={active}
-                    value={impactPeople}
-                    onChange={e => handleChange(e)}
-                    className={`col-6 ${errors.impacto ? ('border border-danger') : null}`}
-                />
-                {errors.impacto && (<small className="text-center text-danger">{errors.impacto}</small>)}
-            </FormGroup>
-            <FormGroup className="text-center">
+            <div className="justify-content-around row mt-4" >
+                <Button
+                    color="warning"
+                    onClick={() => (setResetForm(true))}
+                    className="col-4 buttonsProjects"
+                >
+                    Restablecer
+                </Button>
                 <Button
                     type='submit'
                     color="primary"
-                    style={{ borderRadius: '25px', fontSize: '20px', marginTop: '1rem' }}
+                    className="col-4 buttonsProjects"
                     onClick={() => saveOnSiteEvent()}
                 >
                     Guardar
                 </Button>
-            </FormGroup>
-            {modalConfirm &&
-                (<ModalConfirmComponentJSX />)
-
-            }
+            </div>
+            {modalConfirm && (<ModalConfirmComponentJSX />)}
+            {resetForm && (<ResetForm />)}
         </>
     );
 }

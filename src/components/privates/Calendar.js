@@ -14,12 +14,10 @@ const CalendarComponent = () => {
 
 
     const {
-        setSidebar,
-        sidebar,
+        handleEditEvent,
         coleccion,
-        setResetDropdown,
-        setActive,
-        setGenerales
+        sidebar,
+        setSidebar
     } = useContext(sessionContext)
 
     const colectionPrepare = coleccion.map(evento => {
@@ -32,34 +30,17 @@ const CalendarComponent = () => {
         }
     })
 
-
-    const handleEditEvent = (id) => {
-        const localEvent = coleccion.filter(evento => evento.id === id)
-        console.log(localEvent)
-        setResetDropdown(false);
-        setActive(!moment(localEvent[0].end.split(" ")[0]).isBefore(moment(), 'day'))
-        setGenerales({
-            ...localEvent[0],
-            start: localEvent[0].start.replace(' ', "T"),
-            end: localEvent[0].end.replace(' ', "T")
-        });
-        setSidebar(false);
-        setResetDropdown(true);
-    }
-
-
-
     return (
         <Container fluid={true} style={{ height: 'auto' }} >
-            <div className="d-flex flex-row-reverse pb-4 pt-2">
+            <div className="d-flex flex-row-reverse pb-2 pt-2">
                 <i onClick={() => setSidebar(!sidebar)}
                     style={{ cursor: "pointer" }}
                     title="Nuevo"
                 >
                     <FontAwesomeIcon
                         icon={faCalendarPlus}
-                        className="iconcolor"
-                        size="3x"
+                        className="iconcolorCalendar"
+
                     />
                 </i>
             </div>
@@ -68,7 +49,8 @@ const CalendarComponent = () => {
                     localizer={Localizer}
                     events={(colectionPrepare === [] || colectionPrepare === undefined) ? ([]) : (colectionPrepare)} //si hay error en la descarga o no encontro eventos, 
                     // colocamos un array en blanco, evitando el bloqueo de la aplicacion
-                    onDoubleClickEvent={(event) => handleEditEvent(event.id)}
+                    onDoubleClickEvent={(event) => handleEditEvent(coleccion.filter(evento => evento.id === event.id)[0])}
+                    //filtramos el objeto original, para enviarlo al sidebar a edicion
                     startAccessor="start"
                     endAccessor="end"
                     messages={{

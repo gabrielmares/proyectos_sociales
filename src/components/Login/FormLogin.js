@@ -106,12 +106,13 @@ const LoginComponent = () => {
     return (
         <Col className="LoginComponent">
             <Row>
-                <Col className="grameenSlogan" md="6" xs="6" lg="9">
-                    <span className="primer_parrafo">Unidos</span>
-                    <span className="segundo_parrafo"> Transformando</span>
-                    <span className="tercer_parrafo"> Comunidades</span>
-                </Col>
-                <Col md="4" xs="4" lg="2">
+            <span className="grameenSlogan">Unidos Transformando Comunidades</span>
+                {/* <Col className="" > */}
+                    
+                    {/* <span className="segundo_parrafo"> </span>
+                    <span className="tercer_parrafo"> </span> */}
+                {/* </Col> */}
+                <Col className="w-25 h-100">
                     <Card className="formLogin text-center">
                         <CardHeader>
                             <h2 className="text-center">Bienvenido</h2>

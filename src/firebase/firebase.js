@@ -61,7 +61,6 @@ export function logOut() {
 
 // obtener la informacion del usuario y el tokenId para los intercambios con el backend
 export const useAuth = () => {
-    console.log('llamando a firebase')
     const [logged, saveLogged] = React.useState({
         isSignedIn: true,
         pending: true,
@@ -79,7 +78,7 @@ export const useAuth = () => {
             }
             else { //si no hay usuario limpiamos valores condicionales
                 console.log('sin datos')
-                saveLogged({ pending: false, user: '', isSignedIn: false})
+                saveLogged({ pending: false, user: '', isSignedIn: false })
             }
         })
         return () => unsuscribe();
@@ -108,7 +107,7 @@ export const saveElement = async (collection, element) => {
 }
 
 
-// descarga la lista de comunidades y/o lineas de intervencion
+// descarga la lista lineas de intervencion
 export const GetDocuments = (colectionToDownload) => {
     let array = [];
     const [list, setList] = useState({
@@ -150,7 +149,6 @@ export const saveEvents = async (element) => {
     try {
         await firebase.firestore().collection('listaEventos').doc(element.title).set({ ...element, id: Date.now() })
             .then(res => {
-                // console.log(res)
                 return res;
             })
             .catch(err => console.log(err))
@@ -200,4 +198,29 @@ export const GetEvents = (colectionToDownload) => {
     return list;
 
 
+}
+
+export const DeleteDocument = async (title) => {
+    try {
+        await firebase.firestore().collection('listaEventos').doc(title).delete();
+        return console.log('documento eliminado');
+    } catch (err) {
+        return console.error(err);
+    }
+
+}
+
+
+export const CloseEvent = async (event, array) => {
+    try {
+        await firebase
+            .firestore()
+            .collection('listaEventos')
+            .doc(event)
+            .update({
+                impactPeople: array
+            })
+    } catch (error) {
+        return console.log(error)
+    }
 }

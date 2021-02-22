@@ -12,7 +12,7 @@ const ModalConfirmComponentJSX = () => {
         setGenerales,
         setResetDropdown,
         setActive,
-        setSelection } = useContext(sessionContext)
+    } = useContext(sessionContext)
 
 
     const newElement = () => {
@@ -21,7 +21,6 @@ const ModalConfirmComponentJSX = () => {
                 .then(() => {
                     setResetDropdown(true)
                     setActive(true);
-                    setSelection(0);
                     setGenerales({
                         objective: "",
                         title: "",
@@ -42,7 +41,7 @@ const ModalConfirmComponentJSX = () => {
                     })
                     setResetDropdown(false)
                     setModalConfirm(false)
-                }) 
+                })
                 .catch(err => {
                     alert('no se pudo guardar el documento', err)
                     console.log(err)
@@ -56,17 +55,19 @@ const ModalConfirmComponentJSX = () => {
                 <strong>Confirmacion</strong>
             </ModalHeader>
             <ModalBody className="text-center">
-                <h4>De click en guardar para almacenar el proyecto/evento</h4>
+                <h6>De click en guardar para almacenar el proyecto/evento</h6>
             </ModalBody>
             <ModalFooter className="justify-content-center">
                 <Button
                     color="secondary"
+                    className="buttonsProjects"
                     onClick={() => (setModalConfirm(false))}
                 >
                     Cancelar
                         </Button>
                 <Button
                     color="primary"
+                    className="buttonsProjects"
                     onClick={() => newElement()}
                 >
                     Guardar

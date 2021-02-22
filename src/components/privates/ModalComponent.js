@@ -10,7 +10,7 @@ const ModalComponentJSX = () => {
     // y pasa a la funcion que almacena en BD
     const [item, setItem] = useState('');
 
-    const { setShowModal, showModal, propsModal } = useContext(sessionContext)
+    const { setShowModal, showModal, propsModal, setResetDropdown } = useContext(sessionContext)
     const { modelo, titulo, cuerpoMsg, placeholder } = propsModal //recibe las  props desde el componente que lo llamo a ejecucion
     if (!showModal) setShowModal(false) //escondemos la ventana modal
 
@@ -23,7 +23,10 @@ const ModalComponentJSX = () => {
         elements.map(
             elemento => saveElement(modelo, elemento.trim())
                 .then(() => {
-
+                    setResetDropdown(true);
+                    setTimeout(() => {
+                        setResetDropdown(false)
+                    }, 40);
                     setItem('');
                     setShowModal(false) //escondemos el modal despues de almacenar datos
                     return console.log('elemento almacenado')
@@ -48,7 +51,7 @@ const ModalComponentJSX = () => {
                                 <Col>
                                     <Input
                                         type="text"
-                                        placeholder={ `nombre de ${placeholder}`}
+                                        placeholder={`nombre de ${placeholder}`}
                                         id="item"
                                         name='item'
                                         value={item}
@@ -73,7 +76,6 @@ const ModalComponentJSX = () => {
                     >
                         agregar
                         </Button>
-
                 </ModalFooter>
             </Modal>
         </>

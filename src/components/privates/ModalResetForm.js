@@ -3,31 +3,7 @@ import { Modal, ModalBody, ModalHeader, ModalFooter, Button } from 'reactstrap'
 import { sessionContext } from '../../provider/contextGlobal'
 
 const ResetForm = () => {
-    const { setGenerales, setResetForm, resetForm, setActive } = useContext(sessionContext)
-
-
-    const resetFormFunction = () => {
-        setGenerales({
-            objective: "",
-            title: "",
-            allday: false,
-            responsable: "",
-            lineasIntervencion: [],
-            tipoEvento: 0,
-            listaDeComunidadesAsignadas: [],
-            tema: '',
-            impactPeople: '0',
-            period: '1',
-            start: '',
-            end: '',
-            eventSelection: '',
-            placeEvent: '',
-            bgcolor: '',
-            emailAsistentes: ''
-        })
-        setActive(true)
-        setResetForm(false)
-    }
+    const { setResetForm, resetForm, resetFormFunction } = useContext(sessionContext)
 
 
     return (

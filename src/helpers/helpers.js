@@ -1,3 +1,4 @@
+import { Comunidades } from "./Comunidades";
 
 
 export function inputsProjectValidator(generales) {
@@ -8,22 +9,28 @@ export function inputsProjectValidator(generales) {
         responsable,
         objective,
         lineasIntervencion,
-        listaDeComunidadesAsignadas, start,
+        listaDeComunidadesAsignadas,
+        start,
         end,
-        tema
+        sucursal,
+        tema,
+        municipioSelect
     } = generales;
 
 
 
 
-    if (!title || title.trim().length < 6) errores.nombre = 'La longitud del nombre del proyecto debe ser mayor a 6 caracteres'
+    if (!title || title.trim().length < 6) errores.title = 'El nombre del proyecto debe ser mayor a 6 caracteres'
     if (!responsable || responsable.trim().length < 4) errores.responsable = 'El nombre del responsable debe ser mayor a 4 caracteres'
     if (!objective || objective.trim().length < 10) errores.objetivo = 'El objetivo del programa debe ser mayor a 10 caracteres'
     if (lineasIntervencion.length === 0) errores.lineasIntervencion = 'Es necesario definir al menos una linea de intervencion'
+    if (municipioSelect === "") errores.municipio = 'Se requiere el municipio de trabajo'
     if (listaDeComunidadesAsignadas.length === 0) errores.listaDeComunidadesAsignadas = 'Es necesario definir al menos una comunidad de intervencion'
+    if (sucursal === "") errores.sucursal = 'Debe definir la sucursal responsable'
     if (start === "" || start === "") errores.fechaInicio = 'Es necesario definir ambas fechas'
     if (start > end) errores.fechaFin = 'La fecha de inicio no puede ser mayor a la fecha de culminacion'
-    if (tema.trim().length < 4) errores.tema = 'Es necesario ser mas descriptivo en la tematica del evento'
+    if (Comunidades)
+        if (tema.trim().length < 4) errores.tema = 'Es necesario ser mas descriptivo en la tematica del evento'
 
 
     return errores;
@@ -31,22 +38,27 @@ export function inputsProjectValidator(generales) {
 
 
 
-export function inputsOnSiteValidator(generales, start, placeEvent) {
+export function inputsOnSiteValidator(generales, start) {
 
     let errores = {}
     const {
         title,
         responsable,
-        objetivo,
+        objective,
+        sucursal,
+        municipioSelect,
+        end,
         lineasIntervencion
     } = generales;
 
-    if (!title || title.trim().length < 6) errores.nombre = 'La longitud del nombre del proyecto debe ser mayor a 6 caracteres'
+    if (!title || title.trim().length < 6) errores.title = 'El nombre del proyecto debe ser mayor a 6 caracteres'
     if (!responsable || responsable.trim().length < 4) errores.responsable = 'El nombre del responsable debe ser mayor a 4 caracteres'
-    if (!objetivo || objetivo.trim().length < 10) errores.objetivo = 'El objetivo del programa debe ser mayor a 10 caracteres'
+    if (!objective || objective.trim().length < 10) errores.objetivo = 'El objetivo del programa debe ser mayor a 10 caracteres'
+    if (sucursal === "") errores.sucursal = 'Debe definir la sucursal responsable'
+    if (municipioSelect === "") errores.municipio = 'Se requiere el municipio de trabajo'
     if (lineasIntervencion.length === 0) errores.lineasIntervencion = 'Es necesario definir al menos una linea de intervencion'
+    if (start >= end) errores.fechaEvento = 'Es necesario definir la fecha del evento'
     if (!start === "" || start <= Date.now()) errores.dateEvent = 'La fecha ingresada no es valida'
-    if (!placeEvent || placeEvent.trim().length < 5) errores.place = 'No se reconoce el lugar del evento, como valido'
 
     return errores;
 }
@@ -57,7 +69,7 @@ export function inputsVirtualEventValidator(generales) {
     const {
         title,
         responsable,
-        objetivo,
+        objetive,
         lineasIntervencion,
         start,
         emailAsistentes
@@ -71,9 +83,9 @@ export function inputsVirtualEventValidator(generales) {
         })
     }
 
-    if (!title || title.trim().length < 6) errores.nombre = 'La longitud del nombre del proyecto debe ser mayor a 6 caracteres'
+    if (!title || title.trim().length < 6) errores.nombre = 'El nombre del proyecto debe ser mayor a 6 caracteres'
     if (!responsable || responsable.trim().length < 4) errores.responsable = 'El nombre del responsable debe ser mayor a 4 caracteres'
-    if (!objetivo || objetivo.trim().length < 10) errores.objetivo = 'El objetivo del programa debe ser mayor a 10 caracteres'
+    if (!objetive || objetive.trim().length < 10) errores.objetivo = 'El objetivo del programa debe ser mayor a 10 caracteres'
     if (lineasIntervencion.length === 0) errores.lineasIntervencion = 'Es necesario definir al menos una linea de intervencion'
     if (!start === "" || start <= Date.now()) errores.dateEvent = 'La fecha ingresada no es valida'
     virtualEventEmails(emailAsistentes);
@@ -82,6 +94,7 @@ export function inputsVirtualEventValidator(generales) {
 }
 
 export const changeDate = (e, hours) => {
+
     const fecha = String((e).replace('T', " ") + ' UTC')
     const newDate = new Date(fecha)
     newDate.setHours(newDate.getHours() + parseInt(hours))

@@ -1,11 +1,9 @@
-import { useContext, useState } from 'react'
-import { Card, CardHeader, CardBody, CardFooter, Row } from 'reactstrap'
+import { useContext } from 'react'
+import { Card, CardBody, CardFooter, CardTitle } from 'reactstrap'
 import { sessionContext } from '../../provider/contextGlobal'
-import moment from 'moment'
+
 
 const CardComponent = ({ event }) => {
-    // eslint-disable-next-line 
-    const [localEvent, setLocalEvent] = useState(event)
 
     const {
         title,
@@ -14,14 +12,11 @@ const CardComponent = ({ event }) => {
         end,
         tipoEvento,
         placeEvent,
-    } = localEvent
+    } = event
 
 
     const {
-        setSidebar,
-        setResetDropdown,
-        setActive,
-        setGenerales,
+        handleEditEvent
     } = useContext(sessionContext)
 
     // formatear la fecha en modo DD/MM/DDDD
@@ -31,43 +26,20 @@ const CardComponent = ({ event }) => {
         return datetime;
     }
 
-
-
-    // funcion que pasa al formulario al objeto a editar o cerrar
-    const handleEditEvent = (localEvent) => {
-        setResetDropdown(false);
-        setActive(!moment(localEvent.end.split(" ")[0]).isBefore(moment(), 'day'))
-        setGenerales({
-            ...localEvent,
-            start: localEvent.start.replace(' ', "T"),
-            end: localEvent.end.replace(' ', "T")
-        });
-        setSidebar(false);
-        setResetDropdown(true);
-    }
-
-
-
     return (
-        <Card onDoubleClick={e => handleEditEvent(localEvent)} style={{ cursor: 'pointer' }}>
-            <CardHeader>
-                <Row>
-                    <span className="text-left mr-auto " style={{ fontSize: '14px' }}><strong>{title}</strong></span>
-                    <span style={{ fontSize: '11px', marginRight: '2px', textTransform: 'uppercase' }}>
-                        {/* tipo de evento, si es proyecto aparecen "En Campo", si no, lo que se almaceno en la coleccion */}
-                        {(parseInt(tipoEvento) === 1) ? ('En Campo') : (placeEvent)}
-                    </span>
-                </Row>
-            </CardHeader>
+        <Card onDoubleClick={() => handleEditEvent(event)} className="cardEvent">
+            <CardTitle tag='h6' className="pt-2 ml-3"><strong>{title}</strong>
+                <span className="float-right mt-1 mr-3">
+                    {(parseInt(tipoEvento) === 1) ? ('En Campo') : (placeEvent)}
+                </span>
+            </CardTitle>
             <CardBody>
                 <span>{responsable}</span>
             </CardBody>
-            <CardFooter style={{ fontSize: '11px' }}>
-                <Row>
-                    {/* fecha de inicio del evento y fecha final */}
-                    <span className="text-left mr-auto">{parseDate(start)}</span>
-                    <span className="text-right">{parseDate(end)}</span>
-                </Row>
+            <CardFooter className="footerCardCSS" >
+                {/* fecha de inicio del evento y fecha final */}
+                <span className="float-left">{parseDate(start)}</span>
+                <span className="float-right">{parseDate(end)}</span>
             </CardFooter>
         </Card>
     );

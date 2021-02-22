@@ -12,11 +12,11 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: 'Poppins', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
-@media screen and (max-height:938px) and (max-width:2100px){
+@media screen and (max-width:2100px){
   
 .bigCalendar-container{
   height: 45em;
@@ -24,7 +24,10 @@ code {
 
 .iconcolor{
   cursor: pointer;
-  color: #3e48b8 ;
+  color: #3e48b8;
+  font-size: 2em;
+  margin-top: 0.1em;
+  margin-right: 0.4em;
 }
 
 .headercss{
@@ -33,6 +36,17 @@ code {
 }
 
 
+.headercss h2{
+  font-size: 42px;
+}
+
+
+.navbargroup{
+  font-size: 20px;
+}
+
+
+/* estilos del formulario  */
 .sidebarcss{
   background-color:#e9e0c6;
   height: 100vh;
@@ -40,10 +54,132 @@ code {
   justify-content: center;
 }
 
- .dropdown-menu {
-  width: fit-content;
+.sidebarCss{
+ display: 'flex';
+ flex-direction: 'column'; 
+ flex-wrap: nowrap;
+  width: 30em
+}
+
+ .sidebarCss h3{
+  font-size: 2em;
+  margin-top: 1em;
+} 
+.sidebarCss h6{
+  font-size: 1em;
+  align-content: center;
+  text-align: center;
+  justify-content: center;
+}
+
+#tipoEvento{
+  margin-top: 0.5em;
+  margin-right: 1em;
+  font-size: 0.81em;
+  width: 22.2em;
+  height: 2.4em;
+}
+
+#nombreProyecto, 
+#responsableProyecto, 
+#objetivoProyecto, 
+#titleEvent, 
+#sucursal,
+#municipios,
+#period,
+#eventSelection,
+#placeEvent {
+  margin-right: 1em;
+  margin-top: 0.3em;
+  font-size: 0.81em;
+  width: 22.1em;
+  height: 2.4em;
+}
+
+#tema {
+  margin-right: 1em;
+  margin-top: 0.5em;
+  font-size: 0.81em;
+  width: 22.1em;
+  height: 2.4em;
+}
+
+#emails {
+  margin-right: 1em;
+  margin-top: 0.3em;
+  font-size: 0.81em;
+  width: 22.1em;
+}
+
+
+#labelActividad,
+#labelActividad,
+#labelObjetivo,
+#labelResponsable,
+#labelTema,
+#labelSucursal,
+#labelcomunidades,
+#labelMunicipio,
+#labelEvento,
+#timeforMeeting,
+#dateToMeeting,
+#formatoActividad,
+#labelplaceEvent,
+#LabelemailsList{
+  margin-left: 1em;
+  margin-top: 0.4em;
+  font-size: 1em;
+  width: 6em;
+  margin-right: auto;
+}
+
+
+.comunidades span{
+  margin-left: auto !important;
+  align-content: center;
+  width: 16em !important;
+}
+.oportunityLines{
+  width: 27em !important;  
+}
+
+.oportunityLines span {
+  text-decoration: underline;
+  align-content: center;
+  width: 24em !important;
+}
+.oportunityLinesDisable{
+  margin-top: 0.2em;
+  margin-left: 1em;
+  height: 2em;
+  width: 26em !important;
+  pointer-events: none;
+  border: 1px solid rgb(177, 177, 177);
+  background-color: lightgrey;
+}
+
+.disableControl{
+  width: 18em !important;
+  pointer-events: none;
+  margin-right: 0.8em;
+  height: 2.4em;
+  border: 1px solid grey;
+  background-color: lightgrey;
+  margin-left: auto;
+}
+
+
+.comunidades + .dropdown-menu {
+  width: 19em !important;
   height: 200px;
-  /* display: inline-block; */
+  font-size: 11px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.oportunityLines +.dropdown-menu {
+  width: 27em !important;
+  height: 200px;
   overflow: scroll;
   overflow-x: hidden;
 }
@@ -51,6 +187,88 @@ code {
 .show .dropdown-item{
   overflow: hidden;
   display: block;
+}
+
+
+/* estilos para proyectos en campo */
+
+#start, #end{
+  margin-top: 0.3em;
+  margin-left: auto;
+  margin-right: 1em;
+  font-size: 14px;
+  width: 20.5em;
+}
+
+
+
+#labelInicio{
+  margin-top: 0.2em;
+  font-size: 16px;
+}
+
+#labelFin{
+  margin-top: 0.2em;
+  font-size: 16px;
+}
+
+
+.buttonsProjects{
+  font-size: 1em;
+  color: white;
+  border:none;
+  border-radius: 1.4em;
+}
+
+/* estilo para eventos virtuales y en comunidades */
+
+
+.eventsClass{
+  font-size: 1em;
+}
+
+#dateTimeActivity{
+  text-align: right;
+  font-size: 1em;
+  height: 2.3em;
+  width: 16em;
+}
+
+.labelActivity{
+  margin-top: 0.5em;
+  font-size: 1em;
+  width: 9em;
+}
+
+#LabelemailsList{
+  font-size: 1em;
+  width: 4em;
+}
+
+
+#submitVirtualEvent{
+  font-size: 1em;
+  border-radius: 2em;
+}
+
+
+#impactPeople{
+  font-size: 1em;
+  width: 10em;
+}
+
+#labelimpactPeople{
+  margin-top: 1em;
+  font-size: 1em;
+  width: 14em;
+  margin-right: auto;
+}
+
+/* estilos del calendario */
+.iconcolorCalendar{
+  cursor: pointer;
+  color: #3e48b8 ;
+  font-size: 3em;
 }
 
 .rbc-toolbar-label{
@@ -88,6 +306,7 @@ code {
 .LoginComponent{
   height: 100vh;
   width: 100vw;
+  font-family: 'Poppins';
   background: linear-gradient(to bottom, rgba(245, 246, 252, 0.02), rgba(177, 66, 149, 0.73)), url('./components/background_resize.jpg');
   background-position: center center;
   background-repeat: no-repeat;
@@ -100,7 +319,8 @@ code {
 }
 
 .grameenSlogan{
-  font-size: 5vw;  
+  width: 80%;
+  font-size: 6.5em;  
   color: #ffffff;
   margin-top: 5vw;
   margin-left: 3rem;
@@ -109,7 +329,7 @@ code {
 }
 
 .grameenSlogan span{
-  opacity: 0.9;
+  opacity: 0.8;
   animation: text ease 4s;
 }
 
@@ -126,7 +346,11 @@ code {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   right: 10px;
   justify-content: center;
-  
+  margin-right: 5em;
+}
+
+.formLogin h2{
+  font-size: 42px;
 }
 
 .formLogin .padlock{
@@ -171,66 +395,295 @@ code {
 .iconBell{
   color:rgb(235, 31, 31);
   cursor: pointer;
-  font-size: 34px;
+  font-size: 2em;
 }
+
 
 }
 
 /* estilos para pantalla mediana */
-@media screen and (max-height:937px) and (max-width:1600px) {
-  .headercss{
-    height: 5em;
-  }
-  .headercss h2{
-    font-size: 32px;
-  }
-
-  .sidebarCss h3{
-    font-size: 20px;
-  }
-  div.row.form-group{
-    font-size: 12px;
-    
-  }
+@media screen and (max-width:1366px) {
   
-  div.row.form-group input{
-    height: 30px;
-    font-size: 14px;
-  }
-  #tipoEvento{
-    height: 30px;
-    font-size: 14px;
-  }
-  div.row.form-group .dropdown button{
-    font-size: 14px;
-    height: 30px;
-  }
-  div.justify-content-center.row.form-group button{
-    margin-inline: 1rem;
-    border-radius: 15px;
-    font-size: 13px;
-    /* height: 30px; */
-  }
+.bigCalendar-container{
+  height: 30em;
+}
 
-  .sidebarcss .row h4{
-    margin-top: 0.1rem;
-    font-size: 18px;
-  }
+.iconcolor{
+  cursor: pointer;
+  color: #3e48b8 ;
+  font-size: 1.5em;
+  margin-right: 0.5em;
+  margin-top: 0.14em;
+}
+
+.headercss{
+  height: 4em;
+  background-color: #3767a7;
+}
+
+.headercss h2{
+  font-size: 28px;
+}
+
+.navbargroup{
+  font-size: 14px;
+}
 
 
-  .iconBell{
-    font-size: 28px;
-    color:rgb(235, 31, 31);
-    cursor: pointer;
-  }
-  .bigCalendar-container{
-    height: 43em;
-  }
-  
+
+/* sidebar de eventos */
+.sidebarcss{
+  background-color:#e9e0c6;
+  height: 100vh;
+  align-content: center;
+  justify-content: center;
+}
+
+.sidebarcss h4{
+  font-size: 1em;
+}
+.sidebarCss{
+  display: 'flex';
+  flex-direction: 'column'; 
+  flex-wrap: nowrap;
+   width: 22em
+ }
+
+.cardEvent{
+  height: min-content;
+  cursor: pointer;
+}
+
+.cardEvent span{
+  font-size: 0.8em;
+}
+
+.footerCardCSS{
+  font-size: 0.8em;
+}
+
+/* estilos del formulario */
+.sidebarCss h3{
+  margin-top: -0em;
+  font-size: 1.2em;
+}
+
+.sidebarCss h6{
+  font-size: 0.65em;
+}
+
+small{
+  font-size: 10px;
+}
+
+
+#nombreProyecto, 
+#responsableProyecto, 
+#objetivoProyecto, 
+#titleEvent, 
+#sucursal,
+#municipios,
+#period,
+#eventSelection,
+#placeEvent {
+  margin-right: 1em;
+  font-size: 0.81em;
+  width: 15.5em;
+  height: 2.2em;
+}
+
+#labelActividad, 
+#labelActividad, 
+#labelObjetivo, 
+#labelResponsable, 
+#labelTema, 
+#labelSucursal, 
+#labelMunicipio,
+#labelcomunidades,
+#labelEvento,
+#timeforMeeting,
+#labelplaceEvent,
+#dateToMeeting,
+#formatoActividad,
+#LabelemailsList{
+  margin-left: 1em;
+  font-size: 0.9em;
+  width: 6em;
+  margin-right: auto;
+}
+#tipoEvento {
+  margin-top: 0.3em;
+  font-size: 0.81em;
+  padding-bottom: 0.1em;
+  width: 15.5em;
+  height: 2.2em;
+}
+
+#emails {
+  margin-right: 1em;
+  font-size: 0.81em;
+  width: 15.5em;
+  height: 4em;
+}
+.oportunityLines{
+  width: 19em !important;  
+}
+.oportunityLines span{
+  font-size: 14px;
+  align-content: center;
+  width: 20em !important;
+}
+
+.oportunityLinesDisable{
+  margin-left: 1em;
+  height: 2em;
+  width: 18.5em !important;
+  pointer-events: none;
+  border: 1px solid rgb(177, 177, 177);
+  background-color: lightgrey;
+}
+
+.oportunityLinesDisable span{
+  width: 18.5em !important;
+  pointer-events: none;
+
+}
+
+.comunidades{
+  margin-left: auto; 
+  width: 13.5m !important;
+  margin-right: 0.8em;
+}
+
+.comunidades span{
+  margin-left: auto;
+  font-size: 12px;
+  align-content: center;
+  width: 14.3em !important;
+}
+
+.disableControl{
+  margin-left: auto;
+  height: 2em;
+  width: 12.6em !important;
+  pointer-events: none;
+  border: 1px solid grey;
+  background-color: lightgrey;
+}
+
+
+
+.comunidades + .dropdown-menu {
+  width: 14.5em !important;
+  height: 200px;
+  font-size: 11px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.oportunityLines +.dropdown-menu {
+  width: 22em !important;
+  height: 200px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.dropdown-menu.show{
+  font-size: 14px;
+  display: inline-block;
+}
+
+
+
+.show .dropdown-item{
+  overflow: hidden;
+  display: block;
+}
+
+
+
+/* estilos para proyectos en campo */
+
+
+#labelFin, #labelInicio{
+  margin-right: auto;
+  font-size: 0.9em;
+}
+
+#end, #start{
+  margin-left: auto;
+  margin-right: 1em;
+  font-size: 12px;
+  width: 16.8em;
+  height: 2.5em;
+}
+
+#tema{
+  margin-top: 0.5em;
+  margin-left: auto;
+  font-size: 0.81em;
+  width: 15.5em;
+  height: 2.3em;
+}
+
+.buttonsProjects{
+  font-size: 0.85em;
+  border-radius: 1.4em;
+  width: 7em;
+}
+
+#impactPeople{
+  font-size: 0.81em;
+  width: 10em;
+}
+
+#labelimpactPeople{
+  margin-top: 1em;
+  font-size: 0.81em;
+  width: 14em;
+  margin-right: auto;
+}
+
+
+
+/* estilo para eventos virtuales y en comunidades */
+
+/* .eventsClass{
+  font-size: 0.81em;
+} */
+#dateTimeActivity{
+  text-align: right;
+  font-size: 0.79em;
+  width: 16em;
+  height: 2.2em ;
+}
+
+.labelActivity {
+  margin-top: 0.7em;
+  font-size: 0.81em;
+  width: 9em;
+}
+
+#LabelemailsList{
+  font-size: 0.81em;
+  width: 4em;
+}
+
+
+#submitVirtualEvent{
+  font-size: 0.81em;
+  border-radius: 2em;
+}
+
+
+/* estilos del calendario */
+
 .rbc-toolbar-label{
+  height: 1em;
+  font-size: 13px;
   text-transform: capitalize;
   font-weight: 700;
-  /* margin-left: 10rem; */
+  margin-left: auto;
 }
 
 .rbc-month-view{
@@ -238,37 +691,107 @@ code {
 }
 
 .rbc-month-header{
+  font-size: 13px;
   text-transform: capitalize;
 }
 
 .rbc-btn-group{
+  font-size: 11px;
   font-weight: 700;
 }
-.rbc-toolbar span{
-  font-size: 12px;
+.iconcolorCalendar{
+  cursor: pointer;
+  color: #3e48b8 ;
+  font-size: 2em;
+}
+
+  .mainCss{
+    background-color: rgb(250, 250, 250);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }  
+
+* {
+  box-sizing: border-box;
+}
+
+
+/* componentes de pagina de login */
+
+.LoginComponent{
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Poppins';
+  background: linear-gradient(to bottom, rgba(245, 246, 252, 0.02), rgba(177, 66, 149, 0.73)), url('./components/background_resize.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #464646;
+  overflow: hidden;
+  position: relative;
+  
+}
+
+.grameenSlogan{
+  width: 80%;
+  font-size: 5.3vw;  
+  color: #ffffff;
+  margin-top: 3.5vw;
+  margin-left: 3rem;
+  font-weight: 700;
+
+}
+
+.grameenSlogan span{
+  opacity: 0.8;
+  animation: text ease 4s;
+}
+
+
+
+.formLogin{
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  color: #ffffff;
+  position: absolute;
+  margin-top: 12vh;
+  height: 78vh;
+  width: 48vh;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  right: 5px;
   justify-content: center;
+  
 }
 
-
-/* formulario de inicio de sesion */
-
-#submitButton{
-  height: 2.5em;
-  width: 10em;
-  margin-top: 2em;
-  font-size: 0.9em;
-  text-align: center;
+.formLogin .padlock{
+  border-bottom: none;
+  text-align:center;
+  color:#75a3df;
+  opacity: 1;
+  width:15vw;
+  height: 15vh;
 }
+
 
 #email{
   height: 3em;
-  font-size: 14px;
-  margin-bottom: 1.5em;
+  font-size: 13px;
 }
+
+#submitButton{
+  height: 2.2em;
+  width: 10em;
+  font-size: 1em;
+  text-align: center;
+  border-radius: 1.3em;
+}
+
 
 #passsword{
   height: 3em;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .footerLoginModal{
@@ -276,8 +799,14 @@ code {
 }
 
 .resetPassword{
-  margin-top: 2em;
-  font-size: 1em;
+  font-size: 0.9em;
+}
+
+.iconBell{
+  color:rgb(235, 31, 31);
+  cursor: pointer;
+  font-size: 1.4em;
+
 }
 
 }

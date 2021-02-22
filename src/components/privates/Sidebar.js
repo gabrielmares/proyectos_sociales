@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Col, Form, FormGroup, Input, Label, Row } from 'reactstrap'
+import { Col, Form, FormGroup, Input, Label } from 'reactstrap'
 import DropdownMultiselect from "react-multiselect-dropdown-bootstrap"
 import ProjectComponentJSX from './ProjectComponent'
 import ComponentActivity from './ActivityComponent'
@@ -56,17 +56,14 @@ const SidebarComponent = () => {
     }
 
     return (
-        <Col lg={12} className="sidebarCss" >
-            <Row>
-                <Col className="justify-content-center mt-4">
-                    <h3 className="text-center">Registro</h3>
-                    <h6 className="text-center mt-2" style={{ fontSize: '12px' }}>*Todos los campos son obligatorios</h6>
-                </Col>
-            </Row>
-            <hr />
-            <Form style={{ marginTop: '1rem', marginLeft: '1rem' }} onSubmit={e => e.preventDefault()} noValidate>
-                <FormGroup row>
-                    <Label for="nombreProyecto" lg={4} md={4}>Actividad</Label>
+        <Col className="sidebarCss" >
+            <Col className="justify-content-center">
+                <h3 className="text-center">Registro</h3>
+                <h6 className="text-center" >*Todos los campos son obligatorios</h6>
+            </Col>
+            <Form onSubmit={e => e.preventDefault()} noValidate>
+                <FormGroup row style={{marginTop:'-0.1em'}}>
+                    <Label id="labelNombrePro" for="nombreProyecto" className="labelsForm" >Actividad</Label>
                     <Input type="text"
                         id="nombreProyecto"
                         name="title"
@@ -74,12 +71,12 @@ const SidebarComponent = () => {
                         onChange={e => handleChange(e)}
                         required={true}
                         disabled={!active}
-                        className={`col-8  ${errors.lineasIntervencion ? ('border border-danger') : null}`}
+                        className={`  ${errors.lineasIntervencion ? ('border border-danger') : null} `}
                     />
                     {errors.nombre && (<small className="text-center text-danger col-12 mr-auto">{errors.nombre}</small>)}
                 </FormGroup>
-                <FormGroup row>
-                    <Label for="responsableProyecto" className="col-4 mt-2">Responsable</Label>
+                <FormGroup row style={{marginTop:'-0.5em'}}>
+                    <Label id="labelResPro" for="responsableProyecto" className="labelsForm" >Responsable</Label>
                     <Input
                         type='text'
                         id="responsableProyecto"
@@ -88,12 +85,12 @@ const SidebarComponent = () => {
                         onChange={e => handleChange(e)}
                         required={true}
                         disabled={!active}
-                        className={`col-8  ${errors.responsable ? ('border border-danger') : null}`}
+                        className={` ${errors.responsable ? ('border border-danger') : null} `}
                     />
                     {errors.responsable && (<small className="text-center text-danger col-12 mr-auto">{errors.responsable}</small>)}
                 </FormGroup>
-                <FormGroup row>
-                    <Label for="objetivoProyecto" className="col-4 mt-2">Objetivo</Label>
+                <FormGroup row style={{marginTop:'-0.5em'}}>
+                    <Label id="objPro" for="objetivoProyecto" className="labelsForm">Objetivo</Label>
                     <Input
                         type='text'
                         id="objetivoProyecto"
@@ -102,16 +99,16 @@ const SidebarComponent = () => {
                         onChange={e => handleChange(e)}
                         required={true}
                         disabled={!active}
-                        className={`col-8  ${errors.objetivo ? ('border border-danger') : null}`}
+                        className={` ${errors.objetivo ? ('border border-danger') : null}`}
                     />
                     {errors.objetivo && (<small className="text-center text-danger col-12 mr-auto">{errors.objetivo}</small>)}
                 </FormGroup>
 
-                <FormGroup row >
+                <FormGroup row  style={{marginTop:'-0.5em'}}>
                     <Col>
                         {(!showModal || !resetDropdown) && (<DropdownMultiselect
                             placeholder="Lineas de Intervencion"
-                            className={`col-6 ${errors.lineasIntervencion ? ('border border-danger') : null}`}
+                            className={`dropdownsLineas ${errors.lineasIntervencion ? ('border border-danger') : null}`}
                             options={coleccion}
                             disabled={!active}
                             required={true}
@@ -122,20 +119,18 @@ const SidebarComponent = () => {
                     </Col>
                     <FontAwesomeIcon
                         icon={faPlusCircle}
-                        className={`iconcolor mt-1  ${showModal && ('align-items-end')}`}
-                        size='2x'
+                        className={`iconcolor  ${showModal && ('align-items-end')} `}
                         onClick={() => showAndPropsModal()}
                         title="Agregar comunidades"
                     />
                     {errors.lineasIntervencion && (<small className="text-center text-danger col-12 mr-auto">{errors.lineasIntervencion}</small>)}
                 </FormGroup>
-                <FormGroup className="row">
-                    <Label className="mt-2 col-3 mr-auto">
+                <FormGroup className="row" style={{marginTop:'-1em'}}>
+                    <Label id="tipoEven" className="mt-2 col-3 mr-auto" >
                         Tipo
                     </Label>
                     <Input type="select"
                         id="tipoEvento"
-                        className="col-8"
                         name="tipoEvento"
                         disabled={!active}
                         placeholder="Proyecto/Actividad"

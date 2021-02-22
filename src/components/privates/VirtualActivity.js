@@ -1,8 +1,10 @@
 import { useContext } from 'react';
-import { FormGroup, Input, Button, Label } from 'reactstrap'
+import { FormGroup, Button } from 'reactstrap'
 import ModalConfirmComponentJSX from './ModalConfirmSave'
 import { sessionContext } from '../../provider/contextGlobal'
 import { inputsVirtualEventValidator } from '../../helpers/helpers'
+import EventTime from './EventTime'
+import ResetForm from './ModalResetForm'
 
 const ActivityComponent = () => {
 
@@ -13,6 +15,8 @@ const ActivityComponent = () => {
         setGenerales,
         modalConfirm,
         setModalConfirm,
+        setResetForm,
+        resetForm,
         handleChange
     } = useContext(sessionContext);
     const { end, start, emailAsistentes } = generales
@@ -39,39 +43,45 @@ const ActivityComponent = () => {
 
     return (
         <>
-            <FormGroup row>
-                <Label
+            <EventTime />
+            <div className="row">
+                <label
+                    id="LabelemailsList"
                     for="emails"
                     className="mt-1"
                 >
                     Asistentes
 
-                </Label>
-
-                <Input
+                </label>
+                <textarea
                     id="emails"
-                    type="textarea"
+                    className="ml-auto"
+                    name='emails'
                     value={emailAsistentes}
                     onChange={e => handleChange(e)}
-                    style={{ maxHeight: '9rem' }}
                 />
-                <small>Separe los asistentes por ","</small>
+                <small className="ml-auto mr-3">Separe los asistentes por ","</small>
                 {errors.virtualEvent && (<small className="text-center text-danger col-12 mr-auto">{errors.virtualEvent}</small>)}
-            </FormGroup>
-            <FormGroup className="text-center">
+            </div>
+            <FormGroup className="justify-content-around mt-4" row >
+                <Button
+                    color="warning"
+                    onClick={() => (setResetForm(true))}
+                    className="col-4 buttonsProjects"
+                >
+                    Restablecer
+                </Button>
                 <Button
                     type='submit'
+                    className="col-4 buttonsProjects"
                     color="primary"
-                    style={{ borderRadius: '25px', fontSize: '20px', marginTop: '1rem' }}
                     onClick={() => saveVirtualEvent()}
                 >
-                    Guardar
+                    Registrar
                 </Button>
             </FormGroup>
-            {modalConfirm &&
-                (<ModalConfirmComponentJSX />)
-
-            }
+            {modalConfirm && (<ModalConfirmComponentJSX />)}
+            {resetForm && (<ResetForm />)}
         </>
     );
 }
