@@ -28,7 +28,6 @@ const SidebarEventsComponent = () => {
         return newArray
     })
     // revision de objetos fuera de fecha que aun no tienen el numero de personas capturadas
-    console.log(coleccion)
     outDatePending = coleccion.filter(event => (moment(event.end).isBefore(moment(), '[]') && event.impactPeople.length === 0))
     return (
         <>

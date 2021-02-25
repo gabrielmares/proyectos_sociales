@@ -73,7 +73,7 @@ function SidebarFlex() {
         }
     }
 
-
+    
     return (
         <div className="container sidebarCss">
             <h4 className="text-center">Registro</h4>

@@ -54,6 +54,7 @@ const GlobalContext = (props) => {
         if (localEvent.impactPeople.length > 0) return alert('este evento ya cerro, para modificarlo, notifique al area de sistemas')
         // revisamos si el evento esta vencido, para reenviar al usuario a la captura de asistentes
         if (moment(localEvent.end).isBefore(Date.now(), '[]') || moment(localEvent.start).isBefore(Date.now(), '[]')) {
+            setGenerales(localEvent)
             return setAddParticipants(true);
         }
         setResetDropdown(false);
@@ -86,9 +87,6 @@ const GlobalContext = (props) => {
     const { pending, coleccion } = listEventsOnBD
     // cuando termina la descarga de eventos, pasan a la vista
     if (pending) return false
-
-
-
     const resetFormFunction = () => {
         setGenerales({
             objective: "",

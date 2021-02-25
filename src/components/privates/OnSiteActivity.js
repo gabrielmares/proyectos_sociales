@@ -16,7 +16,9 @@ const ActivityOnSiteComponent = () => {
         modalConfirm,
         setModalConfirm,
         setResetForm,
-        resetForm
+        resetForm,
+        editEvent,
+        handleDeleteDocuments
     } = useContext(sessionContext)
     const { start, end } = generales;
 
@@ -41,20 +43,29 @@ const ActivityOnSiteComponent = () => {
     return (
         <>
             <div className="justify-content-around row mt-4" >
+                {(editEvent) && (
+                    <Button
+                        color="danger"
+                        className="col-3 buttonsProjects"
+                        onClick={() => (handleDeleteDocuments(generales.title))}
+                    >
+                        Eliminar
+                    </Button>
+                )}
                 <Button
                     color="warning"
                     onClick={() => (setResetForm(true))}
-                    className="col-4 buttonsProjects"
+                    className="col-3 buttonsProjects"
                 >
-                    Restablecer
+                    Cancelar
                 </Button>
                 <Button
                     type='submit'
                     color="primary"
-                    className="col-4 buttonsProjects"
+                    className="col-3 buttonsProjects"
                     onClick={() => saveOnSiteEvent()}
                 >
-                    Guardar
+                    Registrar
                 </Button>
             </div>
             {modalConfirm && (<ModalConfirmComponentJSX />)}

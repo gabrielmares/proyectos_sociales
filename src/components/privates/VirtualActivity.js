@@ -17,7 +17,9 @@ const ActivityComponent = () => {
         setModalConfirm,
         setResetForm,
         resetForm,
-        handleChange
+        handleChange,
+        editEvent,
+        handleDeleteDocuments
     } = useContext(sessionContext);
     const { end, start, emailAsistentes } = generales
 
@@ -56,7 +58,7 @@ const ActivityComponent = () => {
                 <textarea
                     id="emails"
                     className="ml-auto"
-                    name='emails'
+                    name='emailAsistentes'
                     value={emailAsistentes}
                     onChange={e => handleChange(e)}
                 />
@@ -64,16 +66,25 @@ const ActivityComponent = () => {
                 {errors.virtualEvent && (<small className="text-center text-danger col-12 mr-auto">{errors.virtualEvent}</small>)}
             </div>
             <FormGroup className="justify-content-around mt-4" row >
+                {(editEvent) && (
+                    <Button
+                        color="danger"
+                        className="col-3 buttonsProjects"
+                        onClick={() => (handleDeleteDocuments(generales.title))}
+                    >
+                        Eliminar
+                    </Button>
+                )}
                 <Button
                     color="warning"
                     onClick={() => (setResetForm(true))}
-                    className="col-4 buttonsProjects"
+                    className="col-3 buttonsProjects"
                 >
-                    Restablecer
+                    Cancelar
                 </Button>
                 <Button
                     type='submit'
-                    className="col-4 buttonsProjects"
+                    className="col-3 buttonsProjects"
                     color="primary"
                     onClick={() => saveVirtualEvent()}
                 >

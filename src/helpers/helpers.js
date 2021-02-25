@@ -1,4 +1,4 @@
-import { Comunidades } from "./Comunidades";
+// import { Comunidades } from "./Comunidades";
 
 
 export function inputsProjectValidator(generales) {
@@ -11,7 +11,7 @@ export function inputsProjectValidator(generales) {
         lineasIntervencion,
         listaDeComunidadesAsignadas,
         start,
-        end,
+        // end,
         sucursal,
         tema,
         municipioSelect
@@ -27,9 +27,9 @@ export function inputsProjectValidator(generales) {
     if (municipioSelect === "") errores.municipio = 'Se requiere el municipio de trabajo'
     if (listaDeComunidadesAsignadas.length === 0) errores.listaDeComunidadesAsignadas = 'Es necesario definir al menos una comunidad de intervencion'
     if (sucursal === "") errores.sucursal = 'Debe definir la sucursal responsable'
-    if (start === "" || start === "") errores.fechaInicio = 'Es necesario definir ambas fechas'
-    if (start > end) errores.fechaFin = 'La fecha de inicio no puede ser mayor a la fecha de culminacion'
-    if (Comunidades)
+    if (start === "" /*|| start <= Date.now() */) errores.fechaInicio = 'Es necesario definir ambas fechas'
+    // if (start > end) errores.fechaFin = 'La fecha de inicio no puede ser mayor a la fecha de culminacion'
+    // if (Comunidades)
         if (tema.trim().length < 4) errores.tema = 'Es necesario ser mas descriptivo en la tematica del evento'
 
 
@@ -47,7 +47,7 @@ export function inputsOnSiteValidator(generales, start) {
         objective,
         sucursal,
         municipioSelect,
-        end,
+        // end,
         lineasIntervencion
     } = generales;
 
@@ -57,8 +57,8 @@ export function inputsOnSiteValidator(generales, start) {
     if (sucursal === "") errores.sucursal = 'Debe definir la sucursal responsable'
     if (municipioSelect === "") errores.municipio = 'Se requiere el municipio de trabajo'
     if (lineasIntervencion.length === 0) errores.lineasIntervencion = 'Es necesario definir al menos una linea de intervencion'
-    if (start >= end) errores.fechaEvento = 'Es necesario definir la fecha del evento'
-    if (!start === "" || start <= Date.now()) errores.dateEvent = 'La fecha ingresada no es valida'
+    // if (start >= end) errores.fechaEvento = 'Es necesario definir la fecha del evento'
+    if (!start === "" /*|| start <= Date.now() */) errores.dateEvent = 'La fecha ingresada no es valida'
 
     return errores;
 }
@@ -69,7 +69,7 @@ export function inputsVirtualEventValidator(generales) {
     const {
         title,
         responsable,
-        objetive,
+        objective,
         lineasIntervencion,
         start,
         emailAsistentes
@@ -82,12 +82,11 @@ export function inputsVirtualEventValidator(generales) {
             return errores
         })
     }
-
     if (!title || title.trim().length < 6) errores.nombre = 'El nombre del proyecto debe ser mayor a 6 caracteres'
     if (!responsable || responsable.trim().length < 4) errores.responsable = 'El nombre del responsable debe ser mayor a 4 caracteres'
-    if (!objetive || objetive.trim().length < 10) errores.objetivo = 'El objetivo del programa debe ser mayor a 10 caracteres'
+    if (!objective || objective.trim().length < 10) errores.objetivo = 'El objetivo del programa debe ser mayor a 10 caracteres'
     if (lineasIntervencion.length === 0) errores.lineasIntervencion = 'Es necesario definir al menos una linea de intervencion'
-    if (!start === "" || start <= Date.now()) errores.dateEvent = 'La fecha ingresada no es valida'
+    if (!start === "" /*|| start <= Date.now() */) errores.dateEvent = 'La fecha ingresada no es valida'
     virtualEventEmails(emailAsistentes);
 
     return errores;

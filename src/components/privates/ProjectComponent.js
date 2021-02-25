@@ -115,7 +115,7 @@ const ProjectComponentJSX = () => {
                 {(editEvent) && (
                     <Button
                         color="danger"
-                        className="buttonsProjects"
+                        className="col-3 buttonsProjects"
                         onClick={() => (handleDeleteDocuments(generales.title))}
                     >
                         Eliminar
@@ -123,7 +123,7 @@ const ProjectComponentJSX = () => {
                 )}
                 <Button
                     color="warning"
-                    className="buttonsProjects"
+                    className="col-3 buttonsProjects"
                     onClick={() => (setResetForm(true))}
                 >
                     Cancelar
@@ -132,7 +132,7 @@ const ProjectComponentJSX = () => {
                     type='submit'
                     color="primary"
                     required={true}
-                    className="buttonsProjects"
+                    className="col-3 buttonsProjects"
                     onClick={() => saveProjectEvent()}
                 >
                     Registrar

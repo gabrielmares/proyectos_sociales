@@ -27,7 +27,6 @@ const AddParticipants = () => {
 
 
     const setValuesRow = (e) => {
-        console.log(e.target.dataset.id)
         if (['ageValue', 'genderValue', 'participants'].includes(e.target.name)) {
             let rows = [...arrayObject];
             rows[e.target.dataset.id][e.target.name] = e.target.value
@@ -47,7 +46,6 @@ const AddParticipants = () => {
     }
 
     const updateEventWithParticipants = () => {
-        console.log('cerrando evento', generales.title);
         CloseEvent(generales.title, arrayObject)
             .then(() => {
                 toggleNested()

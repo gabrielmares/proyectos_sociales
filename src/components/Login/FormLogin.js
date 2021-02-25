@@ -35,7 +35,6 @@ const LoginComponent = () => {
         try {
             loginUser(email, password)
                 .then(res => {
-                    // console.log(res)
                     if (res.code === "auth/user-not-found") {
                         setErrors({
                             ...errors,

@@ -9,13 +9,11 @@ import firebaseConfig from './config';
 
 // funcion que registra a los usuarios en la app
 export const registerUser = async (nombre, email, password, OC) => {
-    console.log(OC)
     if (OC) {
         OC = 1
     } else {
         OC = 0
     }
-    // console.log(OC)
     const newUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
     return await newUser.user.updateProfile({
         displayName: nombre,
@@ -77,7 +75,6 @@ export const useAuth = () => {
                 }
             }
             else { //si no hay usuario limpiamos valores condicionales
-                console.log('sin datos')
                 saveLogged({ pending: false, user: '', isSignedIn: false })
             }
         })
@@ -91,11 +88,9 @@ export const useAuth = () => {
 
 // grabar un elemento en la coleccion, comunidades y lineas de intervencion
 export const saveElement = async (collection, element) => {
-    console.log(collection, element)
     try {
         await firebase.firestore().collection(`${collection}`).doc(element).set({ 'nombre': element })
             .then(res => {
-                console.log(res)
                 return res;
             })
             .catch(err => console.error(err))
@@ -182,7 +177,6 @@ export const GetEvents = (colectionToDownload) => {
     }, [])
 
     const snapshot = async snapshot => {
-        // console.log(snapshot)
         array = [];
         await snapshot.docs.map(comunidad => {
             return array.push(comunidad.data())
@@ -203,7 +197,6 @@ export const GetEvents = (colectionToDownload) => {
 export const DeleteDocument = async (title) => {
     try {
         await firebase.firestore().collection('listaEventos').doc(title).delete();
-        return console.log('documento eliminado');
     } catch (err) {
         return console.error(err);
     }
