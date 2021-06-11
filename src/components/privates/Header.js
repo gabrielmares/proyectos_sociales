@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import {
     Nav,
     DropdownMenu,
@@ -14,20 +14,16 @@ import {
 
 import { logOut } from '../../firebase/firebase'
 import { useHistory, NavLink } from 'react-router-dom'
-
+import GeneradorExcel from './GeneradorExcel'
+import { sessionContext } from '../../provider/contextGlobal'
 
 const HeaderComponent = () => {
 
     const history = useHistory();
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
+    const { listaDeEventos } = useContext(sessionContext)
     const toggle = () => setDropdownOpen(!dropdownOpen);
-
-    // const redirect = () => {
-    //     <Route path="/main" />
-    //     history.push('/main')
-    // }
-
     const closeSession = () => {
         logOut()
         history.push('/');
@@ -50,7 +46,7 @@ const HeaderComponent = () => {
                                 </DropdownToggle>
                                 <DropdownMenu style={{ height: 'fit-content', overflowY: 'hidden', fontSize: '0.9em' }}>
                                     <DropdownItem >Mensual</DropdownItem>
-                                    <DropdownItem >Anual</DropdownItem>
+                                    <DropdownItem onClick={() => GeneradorExcel(listaDeEventos)} >Anual</DropdownItem>
                                     <DropdownItem>Por Proyecto</DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>

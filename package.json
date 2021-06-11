@@ -12,7 +12,8 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.5.0",
     "bootstrap": "^5.0.0-beta1",
-    "firebase": "^8.2.3",
+    "file-saver": "^2.0.5",
+    "firebase": "^8.6.7",
     "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-big-calendar": "^0.30.0",
@@ -23,7 +24,8 @@
     "react-scripts": "4.0.1",
     "react-select": "^4.1.0",
     "react-select-oss": "^3.1.1",
-    "reactstrap": "^8.7.1"
+    "reactstrap": "^8.7.1",
+    "xlsx": "^0.17.0"
   },
   "scripts": {
     "start": "react-scripts start",

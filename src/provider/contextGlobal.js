@@ -147,7 +147,8 @@ const GlobalContext = (props) => {
                 setEditEvent,
                 editEvent,
                 resetFormFunction,
-                handleDeleteDocuments
+                handleDeleteDocuments,
+                listaDeEventos: coleccion
             }}
         >
             {props.children}
